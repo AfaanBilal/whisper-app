@@ -13,11 +13,13 @@ import { StyleSheet } from 'react-native';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
+import Posts from './Posts';
 
 const Explore: React.FC = () => {
     return (
         <SafeScreen>
             <ScreenTitle title="Explore" />
+            <Posts />
         </SafeScreen>
     );
 };
