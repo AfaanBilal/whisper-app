@@ -80,6 +80,7 @@ const TEST_DATA = [
 const Users: React.FC = () => {
     return (
         <FlatList
+            style={styles.container}
             contentContainerStyle={styles.container}
             data={TEST_DATA}
             renderItem={({ item }) => <UserCard {...item} />}
