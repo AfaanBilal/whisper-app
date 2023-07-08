@@ -17,4 +17,6 @@ export const Colors = {
     BLUE: '#2D4059',
     RED: '#FF5722',
     GRAY: '#EEEEEE',
+
+    DARK_GRAY: '#999999',
 };
