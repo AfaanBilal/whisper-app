@@ -26,8 +26,6 @@ const Tab = createMaterialTopTabNavigator();
 const Profile: React.FC = () => {
     return (
         <SafeScreen>
-            <ScreenTitle title="Profile" />
-
             <View style={styles.profileCard}>
                 <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
                 <View style={styles.cardText}>
