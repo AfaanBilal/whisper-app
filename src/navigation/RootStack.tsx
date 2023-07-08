@@ -34,8 +34,8 @@ const RootStack: React.FC = () => {
 
     return (
         <Stack.Navigator>
-            {authenticated ?
-                <Stack.Screen name="Tabs" component={BottomTabs} />
+            {!authenticated ?
+                <Stack.Screen name="Tabs" component={BottomTabs} options={{ header: () => <></> }} />
                 :
                 <Stack.Group>
                     <Stack.Screen name="SignIn" component={SignIn} options={{ header: () => <></> }} />

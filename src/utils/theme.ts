@@ -8,13 +8,13 @@
  * @link      https://eonyx.io
  */
 
-import { MD3DarkTheme as DefaultTheme } from "react-native-paper";
-import { Colors } from "./colors";
+import { MD3DarkTheme as t } from 'react-native-paper';
 
 export const theme = {
-    ...DefaultTheme,
+    ...t,
+    dark: false,
     colors: {
-        ...DefaultTheme.colors,
+        ...t.colors,
         secondaryContainer: 'transparent',
     },
 };

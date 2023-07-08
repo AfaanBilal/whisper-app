@@ -25,8 +25,10 @@ const BottomTabs: React.FC = () => {
     return (
         <Tab.Navigator
             initialRouteName="Home"
-            shifting={true}
-            barStyle={{ backgroundColor: Colors.SOFT_WHITE, marginBottom: -SpacingH.s2 }}>
+            labeled={false}
+            activeColor={Colors.SOFT_WHITE}
+            inactiveColor={Colors.BLACK}
+            barStyle={{ backgroundColor: Colors.DARK, marginBottom: -SpacingH.s2 }}>
             <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name={focused ? "home" : "home-outline"} color={color} size={24} /> }} />
             <Tab.Screen name="Explore" component={Explore} options={{ tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "search" : "search-outline"} color={color} size={22} /> }} />
             <Tab.Screen name="Notifications" component={Notifications} options={{ tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name={focused ? "heart" : "heart-outline"} color={color} size={22} /> }} />
