@@ -14,7 +14,6 @@ import { Avatar, Text } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import SafeScreen from '../components/SafeScreen';
-import ScreenTitle from '../components/ScreenTitle';
 import { Colors } from '../utils/colors';
 import { SpacingH, SpacingW } from '../utils/size';
 import { Fonts } from '../utils/fonts';
