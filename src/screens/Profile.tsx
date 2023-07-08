@@ -35,7 +35,12 @@ const Profile: React.FC = () => {
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }}>afaan.dev</Text>
                     </View>
-                    <Text variant="titleSmall" style={{ marginTop: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>I never could say anything about myself.</Text>
+                    <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>I never could say anything about myself.</Text>
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
+                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>112 followers</Text>
+                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
+                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>73 following</Text>
+                    </View>
                 </View>
             </View>
 
