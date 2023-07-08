@@ -9,14 +9,34 @@
  */
 
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, TextInput } from 'react-native-paper';
 
 import SafeScreen from '../../components/SafeScreen';
+import { SpacingH, SpacingW } from '../../utils/size';
 
 const SignIn: React.FC = () => {
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [passwordVisible, setPasswordVisible] = React.useState(false);
+
     return (
         <SafeScreen>
-            <Text>Sign In</Text>
+            <View style={styles.container}>
+                <Text variant="displayMedium">Sign In</Text>
+
+                <View style={styles.inputContainer}>
+                    <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} />
+                    <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }}
+                        secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
+                </View>
+
+                <View style={styles.buttonContainer}>
+                    <Button mode="text" onPress={() => console.log('Pressed')}>Forgot Password?</Button>
+                </View>
+
+                <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
+            </View>
         </SafeScreen>
     );
 };
@@ -24,5 +44,23 @@ const SignIn: React.FC = () => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: SpacingW.s1,
+    },
+    inputContainer: {
+        width: "100%",
+        marginTop: SpacingH.s2,
+        paddingHorizontal: SpacingW.s5,
+        paddingVertical: SpacingH.s1,
+    },
+    buttonContainer: {
+        width: "100%",
+        paddingHorizontal: SpacingW.s3,
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        marginBottom: SpacingH.s1,
+    },
 });
