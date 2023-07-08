@@ -28,8 +28,8 @@ const RootStack: React.FC = () => {
                 <Stack.Screen name="Tabs" component={BottomTabs} />
                 :
                 <Stack.Group>
-                    <Stack.Screen name="SignIn" component={SignIn} options={{ header: () => <></> }} />
                     <Stack.Screen name="SignUp" component={SignUp} options={{ header: () => <></> }} />
+                    <Stack.Screen name="SignIn" component={SignIn} options={{ header: () => <></> }} />
                 </Stack.Group>
             }
         </Stack.Navigator>

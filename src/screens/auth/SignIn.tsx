@@ -11,11 +11,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import SafeScreen from '../../components/SafeScreen';
 import { SpacingH, SpacingW } from '../../utils/size';
 
 const SignIn: React.FC = () => {
+    const navigation = useNavigation<any>();
+
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -26,8 +29,8 @@ const SignIn: React.FC = () => {
                 <Text variant="displayMedium">Sign In</Text>
 
                 <View style={styles.inputContainer}>
-                    <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} />
-                    <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }}
+                    <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
+                    <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
                         secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
                 </View>
 
@@ -36,6 +39,7 @@ const SignIn: React.FC = () => {
                 </View>
 
                 <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
+                <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignUp')}>Create an account</Button>
             </View>
         </SafeScreen>
     );
