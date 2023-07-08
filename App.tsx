@@ -8,29 +8,29 @@
  * @link      https://eonyx.io
  */
 
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 
+import { theme } from './src/utils/theme';
+import { AuthContext, loadAccessToken, saveAccessToken } from './src/utils/AuthContext';
+import RootStack from './src/navigation/RootStack';
+
 export default function App() {
+    const [accessToken, setAccessToken] = React.useState<string | null>(null);
+    React.useEffect(() => { (async () => { setAccessToken(await loadAccessToken()); })(); }, []);
+    const setAccessTokenPersisted = (token: string) => {
+        setAccessToken(token);
+        (async () => { await saveAccessToken(token); })();
+    };
+
     return (
         <NavigationContainer>
-            <PaperProvider>
-                <View style={styles.container}>
-                    <Text>Open up App.tsx to start working on your app!</Text>
-                    <StatusBar style="auto" />
-                </View>
-            </PaperProvider>
+            <AuthContext.Provider value={{ accessToken, setAccessToken: setAccessTokenPersisted }}>
+                <PaperProvider theme={theme}>
+                    <RootStack />
+                </PaperProvider>
+            </AuthContext.Provider>
         </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
