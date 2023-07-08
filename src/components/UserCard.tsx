@@ -27,6 +27,5 @@ export default UserCard;
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        backgroundColor: Colors.DARK,
     }
 });

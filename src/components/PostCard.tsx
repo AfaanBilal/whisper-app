@@ -27,6 +27,5 @@ export default PostCard;
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        backgroundColor: Colors.DARK,
     }
 });

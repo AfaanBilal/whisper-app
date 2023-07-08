@@ -35,6 +35,7 @@ const TEST_DATA = [
 const Posts: React.FC = () => {
     return (
         <FlatList
+            style={styles.container}
             contentContainerStyle={styles.container}
             data={TEST_DATA}
             renderItem={({ item }) => <PostCard content={item.content} />}

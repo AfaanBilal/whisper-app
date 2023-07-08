@@ -41,15 +41,17 @@ const Profile: React.FC = () => {
                 </View>
             </View>
 
-            <Tab.Navigator screenOptions={{
-                tabBarStyle: {
-                    backgroundColor: Colors.DARK,
-                },
-                tabBarLabelStyle: {
-                    fontFamily: Fonts.Ubuntu,
-                    color: Colors.WHITE,
-                },
-            }}>
+            <Tab.Navigator
+                style={{ flex: 1, backgroundColor: Colors.DARK }}
+                screenOptions={{
+                    tabBarStyle: {
+                        backgroundColor: Colors.DARK,
+                    },
+                    tabBarLabelStyle: {
+                        fontFamily: Fonts.Ubuntu,
+                        color: Colors.WHITE,
+                    },
+                }}>
                 <Tab.Screen name="Posts" component={Posts} />
                 <Tab.Screen name="Followers" component={Users} />
                 <Tab.Screen name="Following" component={Users} />
