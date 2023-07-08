@@ -9,14 +9,15 @@
  */
 
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import SafeScreen from '../components/SafeScreen';
+import ScreenTitle from '../components/ScreenTitle';
 
 const Explore: React.FC = () => {
     return (
         <SafeScreen>
-            <Text>Explore</Text>
+            <ScreenTitle title="Explore" />
         </SafeScreen>
     );
 };
