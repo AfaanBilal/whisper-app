@@ -35,7 +35,7 @@ const SignIn: React.FC = () => {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button mode="text" onPress={() => console.log('Pressed')}>Forgot Password?</Button>
+                    <Button mode="text" onPress={() => navigation.navigate('ResetPassword')}>Forgot Password?</Button>
                 </View>
 
                 <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
