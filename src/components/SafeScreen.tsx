@@ -17,7 +17,7 @@ import { Colors } from '../utils/colors';
 const SafeScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
             {children}
         </SafeAreaView>
     );
