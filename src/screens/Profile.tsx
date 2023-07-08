@@ -11,12 +11,17 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Text } from 'react-native-paper';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
 import { Colors } from '../utils/colors';
 import { SpacingH, SpacingW } from '../utils/size';
 import { Fonts } from '../utils/fonts';
+import Posts from './Posts';
+import Users from './Users';
+
+const Tab = createMaterialTopTabNavigator();
 
 const Profile: React.FC = () => {
     return (
@@ -35,6 +40,20 @@ const Profile: React.FC = () => {
                     <Text variant="titleSmall" style={{ marginTop: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>I never could say anything about myself.</Text>
                 </View>
             </View>
+
+            <Tab.Navigator screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: Colors.DARK,
+                },
+                tabBarLabelStyle: {
+                    fontFamily: Fonts.Ubuntu,
+                    color: Colors.WHITE,
+                },
+            }}>
+                <Tab.Screen name="Posts" component={Posts} />
+                <Tab.Screen name="Followers" component={Users} />
+                <Tab.Screen name="Following" component={Users} />
+            </Tab.Navigator>
         </SafeScreen>
     );
 };
