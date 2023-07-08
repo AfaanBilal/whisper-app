@@ -15,9 +15,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import SafeScreen from '../../components/SafeScreen';
 import { SpacingH, SpacingW } from '../../utils/size';
+import { RootStackNavProp } from '../../navigation/RootStack';
 
 const ResetPassword: React.FC = () => {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<RootStackNavProp>();
 
     const [email, setEmail] = React.useState("");
 
