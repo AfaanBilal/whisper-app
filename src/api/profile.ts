@@ -13,8 +13,10 @@ import { User } from '../types';
 
 const getProfile = async () => (await axios.get('me')).data;
 const updateProfile = async ({ name, bio, link, birthday, is_private }: User) => (await axios.put('me', { name, bio, link, birthday, is_private })).data;
+const getNotifications = async () => (await axios.get('/me/notifications')).data;
 
 export default {
     getProfile,
     updateProfile,
+    getNotifications,
 };
