@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import SafeScreen from '../../components/SafeScreen';
 import { SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
+import ScreenTitle from '../../components/ScreenTitle';
 
 const ResetPassword: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
@@ -25,7 +26,7 @@ const ResetPassword: React.FC = () => {
     return (
         <SafeScreen>
             <View style={styles.container}>
-                <Text variant="displayMedium">Reset Password</Text>
+                <ScreenTitle title="Reset Password" />
 
                 <View style={styles.inputContainer}>
                     <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
