@@ -53,7 +53,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <View style={styles.contentContainer}>
                     <View style={styles.top}>
                         <Text variant="titleMedium" style={styles.author}>{post.author.name}</Text>
-                        <Text variant="labelMedium" style={styles.timestamp}>{format(post.created_at)}</Text>
+                        <Text variant="labelMedium" style={styles.timestamp}>{format(new Date(post.created_at))}</Text>
                     </View>
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
                     <View style={styles.actionContainer}>
