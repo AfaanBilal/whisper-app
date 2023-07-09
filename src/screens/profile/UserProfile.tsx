@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, IconButton, Menu, Text, ActivityIndicator, Button, Chip } from 'react-native-paper';
+import { Avatar, IconButton, Menu, Text, ActivityIndicator, Button, Chip, Appbar } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
@@ -43,6 +43,9 @@ const UserProfile: React.FC = () => {
 
     return (
         <SafeScreen>
+            <Appbar style={{ backgroundColor: Colors.DARK }}>
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
+            </Appbar>
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
                 <View style={styles.profileCard}>
