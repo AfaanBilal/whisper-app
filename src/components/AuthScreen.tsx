@@ -10,10 +10,13 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 
 import SafeScreen from './SafeScreen';
 import ScreenTitle from './ScreenTitle';
 import { Size, SpacingH, SpacingW } from '../utils/size';
+import { Fonts } from '../utils/fonts';
+import { Colors } from '../utils/colors';
 
 const AuthScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
@@ -25,6 +28,7 @@ const AuthScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     {children}
                 </View>
             </View>
+            <Text variant="titleMedium" style={styles.copyright}>&copy; Afaan Bilal</Text>
         </SafeScreen>
     );
 };
@@ -43,5 +47,10 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         paddingTop: Size.h10,
+    },
+    copyright: {
+        textAlign: "center",
+        fontFamily: Fonts.SourceSansPro,
+        color: Colors.DARK_GRAY,
     },
 });
