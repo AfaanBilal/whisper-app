@@ -10,7 +10,8 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, FAB, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { ActivityIndicator, Button, FAB, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { useQuery } from '@tanstack/react-query';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
@@ -19,14 +20,19 @@ import { Colors } from '../utils/colors';
 import { Size, SpacingH, SpacingW } from '../utils/size';
 import { Fonts } from '../utils/fonts';
 import { theme } from '../utils/theme';
+import home from '../api/home';
 
 const Home: React.FC = () => {
     const [showCompose, setShowCompose] = React.useState(false);
+    const { isLoading, data } = useQuery({ queryKey: ['home'], queryFn: home.home });
 
     return (
         <SafeScreen>
             <ScreenTitle title="Whisper" />
-            <Posts />
+            {isLoading ?
+                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
+                <Posts posts={data.posts} />
+            }
             <FAB
                 icon="plus"
                 style={styles.fab}

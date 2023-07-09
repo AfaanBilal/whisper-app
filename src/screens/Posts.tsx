@@ -13,6 +13,7 @@ import { FlatList, StyleSheet } from 'react-native';
 
 import PostCard from '../components/PostCard';
 import { Colors } from '../utils/colors';
+import { Post } from '../types';
 
 const TEST_DATA = [
     {
@@ -98,13 +99,17 @@ const TEST_DATA = [
     },
 ];
 
-const Posts: React.FC = () => {
+type PostProps = {
+    posts: Post[];
+};
+
+const Posts: React.FC<PostProps> = ({ posts }) => {
     return (
         <FlatList
             style={styles.outer}
             contentContainerStyle={styles.container}
-            data={TEST_DATA}
-            renderItem={({ item }) => <PostCard {...item} />}
+            data={posts}
+            renderItem={({ item }) => <PostCard post={item} />}
             keyExtractor={item => item.uuid}
         />
     );

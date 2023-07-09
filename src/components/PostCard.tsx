@@ -16,30 +16,26 @@ import { format } from 'timeago.js';
 import { Colors } from '../utils/colors';
 import { Fonts } from '../utils/fonts';
 import { SpacingH, SpacingW } from '../utils/size';
+import { Post } from '../types';
 
 type PostCardProps = {
-    uuid: string,
-    author: string,
-    content: string,
-    likes: number,
-    created_at: Date,
-    liked: boolean,
+    post: Post;
 };
 
-const PostCard: React.FC<PostCardProps> = ({ uuid, author, content, likes, created_at, liked }) => {
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
     return (
         <View style={styles.container}>
             <View style={styles.postContainer}>
-                <Avatar.Image size={42} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
+                <Avatar.Image size={42} source={{ uri: post.author.image || "https://afaan.dev/assets/Afaan.png" }} />
                 <View style={styles.contentContainer}>
                     <View style={styles.top}>
-                        <Text variant="titleMedium" style={styles.author}>{author}</Text>
-                        <Text variant="labelMedium" style={styles.timestamp}>{format(created_at)}</Text>
+                        <Text variant="titleMedium" style={styles.author}>{post.author.name}</Text>
+                        <Text variant="labelMedium" style={styles.timestamp}>{format(post.created_at)}</Text>
                     </View>
-                    <Text variant="titleMedium" style={styles.postContent}>{content}</Text>
+                    <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
                     <View style={styles.actionContainer}>
-                        <IconButton icon={liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={() => console.log('Pressed')} />
-                        <Text variant="labelMedium" style={styles.likes}>{likes} likes</Text>
+                        <IconButton icon={post.liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={() => console.log('Pressed')} />
+                        <Text variant="labelMedium" style={styles.likes}>{post.likes} likes</Text>
                     </View>
                 </View>
             </View>

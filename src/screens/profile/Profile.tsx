@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
                         backgroundColor: Colors.RED,
                     },
                 }}>
-                <Tab.Screen name="Posts" component={Posts} />
+                <Tab.Screen name="Posts">{props => <Posts posts={[]} {...props} />}</Tab.Screen>
                 <Tab.Screen name="Followers" component={Users} />
                 <Tab.Screen name="Following" component={Users} />
             </Tab.Navigator>

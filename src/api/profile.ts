@@ -9,7 +9,7 @@
  */
 
 import axios from 'axios';
-import { User } from '../screens/profile/EditProfile';
+import { User } from '../types';
 
 const getProfile = async () => (await axios.get('me')).data;
 const updateProfile = async ({ name, bio, link, birthday, is_private }: User) => (await axios.put('me', { name, bio, link, birthday, is_private })).data;

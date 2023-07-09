@@ -24,15 +24,7 @@ import { theme } from '../../utils/theme';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 import { Profile } from '../../api';
 import { Colors } from '../../utils/colors';
-
-export type User = {
-    name: string;
-    link: string;
-    bio: string;
-    image: string;
-    birthday: Date;
-    is_private: boolean;
-};
+import { User } from '../../types';
 
 const EditProfile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
