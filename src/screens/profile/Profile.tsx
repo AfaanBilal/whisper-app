@@ -60,10 +60,10 @@ const Profile: React.FC = () => {
                     onDismiss={() => setShowMenu(false)}
                     theme={{ colors: { elevation: { level2: Colors.DARK } } }}
                     anchor={<IconButton icon="menu" iconColor={Colors.SOFT_WHITE} size={24} style={{ marginTop: -SpacingH.s0 }} onPress={() => setShowMenu(true)} />}>
-                    <Menu.Item onPress={() => { setShowMenu(false); navigation.push('EditProfile'); }} title="Edit Profile" />
-                    <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" />
+                    <Menu.Item onPress={() => { setShowMenu(false); navigation.push('EditProfile'); }} title="Edit Profile" leadingIcon="account" />
+                    <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" leadingIcon="share" />
                     <Divider />
-                    <Menu.Item onPress={handleSignOut} title="Sign Out" />
+                    <Menu.Item onPress={handleSignOut} title="Sign Out" leadingIcon="logout" />
                 </Menu>
             </View>
 
