@@ -37,8 +37,8 @@ const Profile: React.FC = () => {
     const [showMenu, setShowMenu] = React.useState(false);
     const handleSignOut = async () => {
         setShowMenu(false);
-        setAccessToken(null);
         await Auth.signOut();
+        setAccessToken(null);
     };
 
     return (
@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
                         backgroundColor: Colors.RED,
                     },
                 }}>
-                <Tab.Screen name="Posts">{props => <Posts posts={[]} {...props} />}</Tab.Screen>
+                <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} />}</Tab.Screen>
                 <Tab.Screen name="Followers" component={Users} />
                 <Tab.Screen name="Following" component={Users} />
             </Tab.Navigator>
