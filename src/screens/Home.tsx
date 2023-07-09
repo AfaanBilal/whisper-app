@@ -33,6 +33,7 @@ const Home: React.FC = () => {
         mutationFn: async () => await PostAPI.createPost(postContent),
         onSuccess: async () => {
             qC.invalidateQueries(['home']);
+            qC.invalidateQueries(['explore']);
             Toast.show({ type: 'success', text1: 'Posted!', visibilityTime: 1000 });
             setPostContent("");
             setShowCompose(false);
