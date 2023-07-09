@@ -26,6 +26,7 @@ const SignIn: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
     const { setAccessToken } = React.useContext(AuthContext);
 
+    const [loading, setLoading] = React.useState(false);
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -39,6 +40,8 @@ const SignIn: React.FC = () => {
             return;
         }
 
+        setLoading(true);
+
         try {
             const r = await Auth.signIn(email, password);
             setAccessToken(r.data.access_token);
@@ -48,6 +51,8 @@ const SignIn: React.FC = () => {
                 text1: e.response.data.message,
             });
         }
+
+        setLoading(false);
     };
 
     return (
@@ -64,7 +69,7 @@ const SignIn: React.FC = () => {
                 <Button mode="text" onPress={() => navigation.navigate('ResetPassword')}>Forgot Password?</Button>
             </View>
 
-            <AuthButton label="Sign In" onPress={handleSignIn} />
+            <AuthButton label="Sign In" onPress={handleSignIn} loading={loading} />
             <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignUp')}>Create an account</Button>
         </AuthScreen>
     );
