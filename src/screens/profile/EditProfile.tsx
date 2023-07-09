@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Button, TextInput, Switch, Text } from 'react-native-paper';
+import { Avatar, Button, TextInput, Switch, Text, ActivityIndicator } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,6 +22,7 @@ import { theme } from '../../utils/theme';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Profile } from '../../api';
+import { Colors } from '../../utils/colors';
 
 export type User = {
     name: string;
@@ -47,29 +48,32 @@ const EditProfile: React.FC = () => {
     const qC = useQueryClient();
     const m = useMutation({
         mutationFn: async () => { await Profile.updateProfile(user); },
-        onSuccess: () => qC.invalidateQueries({ queryKey: ['profile'] })
+        onSuccess: () => qC.invalidateQueries({ queryKey: ['profile'] }),
     });
 
     return (
         <SafeScreen>
             <ScreenTitle title="Whisper" />
-            <View style={styles.container}>
-                <Avatar.Image size={120} source={{ uri: user.image || "https://afaan.dev/assets/Afaan.png" }} />
-                <View style={styles.inputContainer}>
-                    <TextInput mode="outlined" label="Name" value={user.name} onChangeText={text => setUser({ ...user, name: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />
-                    <TextInput mode="outlined" label="Link" value={user.link} onChangeText={text => setUser({ ...user, link: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="link" />} />
-                    <TextInput mode="outlined" label="Bio" multiline value={user.bio} onChangeText={text => setUser({ ...user, bio: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="text-box-outline" />} />
-                    <View style={styles.switchContainer}>
-                        <Entypo name="lock" size={24} color={theme.colors.secondary} />
-                        <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Private</Text>
-                        <Switch value={user.is_private} onValueChange={value => setUser({ ...user, is_private: value })} />
+            {isLoading ?
+                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ marginTop: SpacingH.s6 }} /> :
+                <View style={styles.container}>
+                    <Avatar.Image size={120} source={{ uri: user.image || "https://afaan.dev/assets/Afaan.png" }} />
+                    <View style={styles.inputContainer}>
+                        <TextInput mode="outlined" label="Name" value={user.name} onChangeText={text => setUser({ ...user, name: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />
+                        <TextInput mode="outlined" label="Link" value={user.link} onChangeText={text => setUser({ ...user, link: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="link" />} />
+                        <TextInput mode="outlined" label="Bio" multiline value={user.bio} onChangeText={text => setUser({ ...user, bio: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="text-box-outline" />} />
+                        <View style={styles.switchContainer}>
+                            <Entypo name="lock" size={24} color={theme.colors.secondary} />
+                            <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Private</Text>
+                            <Switch value={user.is_private} onValueChange={value => setUser({ ...user, is_private: value })} />
+                        </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button mode="contained" uppercase onPress={() => m.mutate()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={m.isLoading}>Save</Button>
+                        <Button mode="outlined" uppercase onPress={() => navigation.goBack()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle}>Back</Button>
                     </View>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <Button mode="contained" uppercase onPress={() => m.mutate()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={m.isLoading}>Save</Button>
-                    <Button mode="outlined" uppercase onPress={() => navigation.goBack()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle}>Back</Button>
-                </View>
-            </View>
+            }
         </SafeScreen>
     );
 };
