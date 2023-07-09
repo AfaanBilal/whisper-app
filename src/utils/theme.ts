@@ -19,5 +19,6 @@ export const theme = {
         primary: Colors.RED,
         onPrimary: Colors.WHITE,
         secondaryContainer: 'transparent',
+        backdrop: "rgba(0,0,0,0.5)",
     },
 };
