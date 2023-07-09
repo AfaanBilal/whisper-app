@@ -14,6 +14,7 @@ import { Text } from 'react-native-paper';
 
 import { Fonts } from '../utils/fonts';
 import { Colors } from '../utils/colors';
+import { SpacingH } from '../utils/size';
 
 type ScreenTitleProps = {
     title: string;
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center",
+        paddingBottom: SpacingH.s0,
     },
     text: {
         fontFamily: Fonts.Aclonica,
