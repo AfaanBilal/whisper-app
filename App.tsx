@@ -12,6 +12,7 @@ import React from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 import { theme } from './src/utils/theme';
 import { AuthContext, loadAccessToken, saveAccessToken } from './src/utils/AuthContext';
@@ -47,6 +48,7 @@ export default function App() {
             <AuthContext.Provider value={{ accessToken, setAccessToken: setAccessTokenPersisted }}>
                 <PaperProvider theme={theme}>
                     <RootStack />
+                    <Toast />
                 </PaperProvider>
             </AuthContext.Provider>
         </NavigationContainer>
