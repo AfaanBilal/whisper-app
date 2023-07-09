@@ -22,7 +22,7 @@ import { SpacingH } from '../utils/size';
 
 const Explore: React.FC = () => {
     const [search, setSearch] = React.useState('');
-    const { isLoading, data } = useQuery({ queryKey: ['explore'], queryFn: Home.explore });
+    const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['explore'], queryFn: Home.explore });
 
     return (
         <SafeScreen>
@@ -30,7 +30,7 @@ const Explore: React.FC = () => {
             <Searchbar theme={{ colors: { elevation: { level3: Colors.DARK }, outline: Colors.BLUE } }} mode="view" placeholder="Search" onChangeText={q => setSearch(q)} value={search} />
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
-                <Posts posts={data.posts} />
+                <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />
             }
         </SafeScreen>
     );

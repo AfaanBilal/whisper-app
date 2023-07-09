@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
     const { setAccessToken } = React.useContext(AuthContext);
 
-    const { isLoading, data } = useQuery({ queryKey: ['profile'], queryFn: ProfileAPI.getProfile });
+    const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['profile'], queryFn: ProfileAPI.getProfile });
 
     const [showMenu, setShowMenu] = React.useState(false);
     const handleSignOut = async () => {
@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
                         backgroundColor: Colors.RED,
                     },
                 }}>
-                <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} />}</Tab.Screen>
+                <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} isFetching={isFetching} refetch={refetch} />}</Tab.Screen>
                 <Tab.Screen name="Followers" component={Users} />
                 <Tab.Screen name="Following" component={Users} />
             </Tab.Navigator>

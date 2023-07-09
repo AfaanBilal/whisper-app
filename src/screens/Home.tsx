@@ -25,7 +25,7 @@ import { Posts as PostAPI } from '../api';
 
 const Home: React.FC = () => {
     const [showCompose, setShowCompose] = React.useState(false);
-    const { isLoading, data } = useQuery({ queryKey: ['home'], queryFn: HomeAPI.home });
+    const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['home'], queryFn: HomeAPI.home });
     const [postContent, setPostContent] = React.useState("");
 
     const qC = useQueryClient();
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
             <ScreenTitle title="Whisper" />
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
-                <Posts posts={data.posts} />
+                <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />
             }
             <FAB icon="plus" style={styles.fab} onPress={() => setShowCompose(true)} />
             <Portal>

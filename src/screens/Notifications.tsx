@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { useQuery } from '@tanstack/react-query';
 
@@ -21,7 +21,7 @@ import { Profile } from '../api';
 import { SpacingH } from '../utils/size';
 
 const Notifications: React.FC = () => {
-    const { isLoading, data } = useQuery({ queryKey: ['notifications'], queryFn: Profile.getNotifications });
+    const { isLoading, isFetching, refetch, data } = useQuery({ queryKey: ['notifications'], queryFn: Profile.getNotifications });
 
     return (
         <SafeScreen>
@@ -30,6 +30,7 @@ const Notifications: React.FC = () => {
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
                 <FlatList
+                    refreshControl={<RefreshControl colors={[Colors.SOFT_WHITE]} tintColor={Colors.SOFT_WHITE} refreshing={isFetching} onRefresh={() => refetch()} />}
                     style={styles.container}
                     contentContainerStyle={styles.container}
                     data={data.notifications}
@@ -37,14 +38,14 @@ const Notifications: React.FC = () => {
                     keyExtractor={item => item.id}
                 />
             }
-        </SafeScreen>
+                </SafeScreen>
     );
 };
 
-export default Notifications;
+            export default Notifications;
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.DARK,
+            const styles = StyleSheet.create({
+                container: {
+                backgroundColor: Colors.DARK,
     },
 });
