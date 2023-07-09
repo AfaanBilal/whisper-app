@@ -17,12 +17,36 @@ import { Colors } from '../utils/colors';
 import { Fonts } from '../utils/fonts';
 import { SpacingH, SpacingW } from '../utils/size';
 import { Post } from '../types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Posts } from '../api';
 
 type PostCardProps = {
     post: Post;
 };
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+    const qC = useQueryClient();
+    const like = useMutation({
+        mutationFn: async () => await Posts.likePost(post.uuid),
+        onSuccess: async () => qC.invalidateQueries(['home']),
+    });
+    const unlike = useMutation({
+        mutationFn: async () => await Posts.unlikePost(post.uuid),
+        onSuccess: async () => qC.invalidateQueries(['home']),
+    });
+
+    const [liked, setLiked] = React.useState(post.liked);
+    const likePress = () => {
+        if (post.liked) {
+            unlike.mutate();
+            setLiked(false);
+        } else {
+            like.mutate();
+            setLiked(true);
+        }
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.postContainer}>
@@ -34,7 +58,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     </View>
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
                     <View style={styles.actionContainer}>
-                        <IconButton icon={post.liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={() => console.log('Pressed')} />
+                        <IconButton icon={liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={likePress} />
                         <Text variant="labelMedium" style={styles.likes}>{post.likes} likes</Text>
                     </View>
                 </View>

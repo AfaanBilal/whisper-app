@@ -21,6 +21,7 @@ import { Colors } from '../utils/colors';
 import { SpacingH } from '../utils/size';
 import { Home as HomeAPI } from '../api';
 import ModalCompose from '../components/ModalCompose';
+import { Posts as PostAPI } from '../api';
 
 const Home: React.FC = () => {
     const [showCompose, setShowCompose] = React.useState(false);
@@ -29,7 +30,7 @@ const Home: React.FC = () => {
 
     const qC = useQueryClient();
     const m = useMutation({
-        mutationFn: async () => await HomeAPI.createPost(postContent),
+        mutationFn: async () => await PostAPI.createPost(postContent),
         onSuccess: async () => {
             qC.invalidateQueries(['home']);
             Toast.show({ type: 'success', text1: 'Posted!', visibilityTime: 1000 });
