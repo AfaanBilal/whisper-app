@@ -74,7 +74,7 @@ const UserProfile: React.FC = () => {
                         </View>
                         <View style={styles.followContainer}>
                             {data?.followed ? <Chip icon="check" mode="outlined">Following</Chip> : <Button mode="outlined" style={styles.button} onPress={() => follow.mutate()} loading={follow.isLoading}>Follow</Button>}
-                            {data?.follower && <Chip icon="check" mode="outlined">Follows you</Chip>}
+                            {data?.follower && <Chip mode="outlined">Follows you</Chip>}
                         </View>
                     </View>
                     <Menu
