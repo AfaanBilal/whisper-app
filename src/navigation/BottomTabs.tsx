@@ -27,7 +27,7 @@ const BottomTabs: React.FC = () => {
             initialRouteName="Home"
             labeled={false}
             activeColor={Colors.SOFT_WHITE}
-            inactiveColor={Colors.BLACK}
+            inactiveColor={Colors.DARK_GRAY}
             barStyle={{ backgroundColor: Colors.DARK, marginBottom: -SpacingH.s2 }}>
             <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name={focused ? "home" : "home-outline"} color={color} size={24} /> }} />
             <Tab.Screen name="Explore" component={Explore} options={{ tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "search" : "search-outline"} color={color} size={22} /> }} />
