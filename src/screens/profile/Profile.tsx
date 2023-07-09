@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, Text, IconButton, Menu, Button, Divider } from 'react-native-paper';
+import { Avatar, Text, IconButton, Menu, Button, Divider, ActivityIndicator } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
@@ -43,35 +43,38 @@ const Profile: React.FC = () => {
 
     return (
         <SafeScreen>
-            <View style={styles.profileCard}>
-                <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
-                <View style={styles.cardText}>
-                    <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@{data?.profile.username}</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL("https://afaan.dev")}>{data?.profile.link}</Text>
+            {isLoading ?
+                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
+                <View style={styles.profileCard}>
+                    <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
+                    <View style={styles.cardText}>
+                        <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@{data?.profile.username}</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL("https://afaan.dev")}>{data?.profile.link}</Text>
+                        </View>
+                        <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{data?.profile.bio}</Text>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.post_count} posts</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.follower_count} followers</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
+                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.following_count} following</Text>
+                        </View>
                     </View>
-                    <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{data?.profile.bio}</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.post_count} posts</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.follower_count} followers</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.following_count} following</Text>
-                    </View>
+                    <Menu
+                        visible={showMenu}
+                        onDismiss={() => setShowMenu(false)}
+                        theme={{ colors: { elevation: { level2: Colors.DARK } } }}
+                        anchor={<IconButton icon="menu" iconColor={Colors.SOFT_WHITE} size={24} style={{ marginTop: -SpacingH.s0 }} onPress={() => setShowMenu(true)} />}>
+                        <Menu.Item onPress={() => { setShowMenu(false); navigation.push('EditProfile'); }} title="Edit Profile" leadingIcon="account" />
+                        <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" leadingIcon="share" />
+                        <Divider />
+                        <Menu.Item onPress={handleSignOut} title="Sign Out" leadingIcon="logout" />
+                    </Menu>
                 </View>
-                <Menu
-                    visible={showMenu}
-                    onDismiss={() => setShowMenu(false)}
-                    theme={{ colors: { elevation: { level2: Colors.DARK } } }}
-                    anchor={<IconButton icon="menu" iconColor={Colors.SOFT_WHITE} size={24} style={{ marginTop: -SpacingH.s0 }} onPress={() => setShowMenu(true)} />}>
-                    <Menu.Item onPress={() => { setShowMenu(false); navigation.push('EditProfile'); }} title="Edit Profile" leadingIcon="account" />
-                    <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" leadingIcon="share" />
-                    <Divider />
-                    <Menu.Item onPress={handleSignOut} title="Sign Out" leadingIcon="logout" />
-                </Menu>
-            </View>
+            }
 
             <Tab.Navigator
                 style={{ flex: 1, backgroundColor: Colors.DARK }}

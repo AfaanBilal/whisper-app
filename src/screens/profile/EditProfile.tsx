@@ -13,6 +13,7 @@ import { StyleSheet, View } from 'react-native';
 import { Avatar, Button, TextInput, Switch, Text, ActivityIndicator } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import SafeScreen from '../../components/SafeScreen';
 import { FontSize, SpacingH, SpacingW } from '../../utils/size';
@@ -20,7 +21,6 @@ import { Fonts } from '../../utils/fonts';
 import ScreenTitle from '../../components/ScreenTitle';
 import { theme } from '../../utils/theme';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Profile } from '../../api';
 import { Colors } from '../../utils/colors';
 
@@ -47,7 +47,7 @@ const EditProfile: React.FC = () => {
 
     const qC = useQueryClient();
     const m = useMutation({
-        mutationFn: async () => { await Profile.updateProfile(user); },
+        mutationFn: async () => await Profile.updateProfile(user),
         onSuccess: () => qC.invalidateQueries({ queryKey: ['profile'] }),
     });
 
