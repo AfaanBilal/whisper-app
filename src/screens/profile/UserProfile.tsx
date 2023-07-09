@@ -73,7 +73,13 @@ const UserProfile: React.FC = () => {
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.following_count} following</Text>
                         </View>
                         <View style={styles.followContainer}>
-                            {data?.followed ? <Chip icon="check" mode="outlined">Following</Chip> : <Button mode="outlined" style={styles.button} onPress={() => follow.mutate()} loading={follow.isLoading}>Follow</Button>}
+                            {data?.followed ?
+                                <Chip icon="check" mode="outlined">Following</Chip> :
+                                (data?.requested ?
+                                    <Chip icon="clock" mode="outlined">Requested</Chip> :
+                                    <Button mode="outlined" style={styles.button} onPress={() => follow.mutate()} loading={follow.isLoading}>Follow</Button>
+                                )
+                            }
                             {data?.follower && <Chip mode="outlined">Follows you</Chip>}
                         </View>
                     </View>

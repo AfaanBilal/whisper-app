@@ -13,6 +13,6 @@ export type User = {
     link: string;
     bio: string;
     image: string;
-    birthday: Date;
+    birthday: string;
     is_private: boolean;
 };

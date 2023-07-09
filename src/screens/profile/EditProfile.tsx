@@ -29,12 +29,13 @@ import { User } from '../../types';
 const EditProfile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
 
-    const [user, setUser] = React.useState<User>({ name: "", link: "", bio: "", image: "", birthday: new Date(), is_private: false });
+    const [user, setUser] = React.useState<User>({ name: "", link: "", bio: "", image: "", birthday: new Date().toISOString(), is_private: false });
     const { isLoading, data } = useQuery({
         queryKey: ['profile'],
         queryFn: Profile.getProfile,
-        onSuccess: () => { setUser(data.profile); },
-
+        onSuccess: async () => {
+            setUser(data.profile);
+        },
     });
 
     const qC = useQueryClient();
