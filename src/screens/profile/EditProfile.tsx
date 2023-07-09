@@ -14,6 +14,7 @@ import { Avatar, Button, TextInput, Switch, Text, ActivityIndicator } from 'reac
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 
 import SafeScreen from '../../components/SafeScreen';
 import { FontSize, SpacingH, SpacingW } from '../../utils/size';
@@ -40,15 +41,17 @@ const EditProfile: React.FC = () => {
     const { isLoading, data } = useQuery({
         queryKey: ['profile'],
         queryFn: Profile.getProfile,
-        onSuccess: () => {
-            setUser(data.profile);
-        },
+        onSuccess: () => { setUser(data.profile); },
+
     });
 
     const qC = useQueryClient();
     const m = useMutation({
         mutationFn: async () => await Profile.updateProfile(user),
-        onSuccess: () => qC.invalidateQueries({ queryKey: ['profile'] }),
+        onSuccess: async (data) => {
+            qC.setQueryData(['profile'], data);
+            Toast.show({ type: 'success', text1: 'Profile updated.', visibilityTime: 1000 });
+        },
     });
 
     return (
