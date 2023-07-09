@@ -13,12 +13,15 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { theme } from './src/utils/theme';
 import { AuthContext, loadAccessToken, removeAccessToken, saveAccessToken } from './src/utils/AuthContext';
 import RootStack from './src/navigation/RootStack';
 import { Fonts } from './src/utils/fonts';
 import { setAuthToken } from './src/api';
+
+const qC = new QueryClient();
 
 export default function App() {
     const [accessToken, setAccessToken] = React.useState<string | null>(null);
@@ -54,10 +57,12 @@ export default function App() {
     return (
         <NavigationContainer>
             <AuthContext.Provider value={{ accessToken, setAccessToken: setAccessTokenPersisted }}>
-                <PaperProvider theme={theme}>
-                    <RootStack />
-                    <Toast />
-                </PaperProvider>
+                <QueryClientProvider client={qC}>
+                    <PaperProvider theme={theme}>
+                        <RootStack />
+                        <Toast />
+                    </PaperProvider>
+                </QueryClientProvider>
             </AuthContext.Provider>
         </NavigationContainer>
     );

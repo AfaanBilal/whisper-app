@@ -13,6 +13,7 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { Avatar, Text, IconButton, Menu, Button, Divider } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
+import { useQueryClient, useQuery } from '@tanstack/react-query';
 
 import SafeScreen from '../../components/SafeScreen';
 import { Colors } from '../../utils/colors';
@@ -23,18 +24,22 @@ import Users from '../Users';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 import { Auth } from '../../api';
 import { AuthContext } from '../../utils/AuthContext';
+import { Profile as ProfileAPI } from '../../api';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Profile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
     const { setAccessToken } = React.useContext(AuthContext);
+    const qC = useQueryClient();
+
+    const q = useQuery({ queryKey: ['profile'], queryFn: ProfileAPI.getProfile });
 
     const [showMenu, setShowMenu] = React.useState(false);
     const handleSignOut = async () => {
         setShowMenu(false);
-        await Auth.signOut();
         setAccessToken(null);
+        await Auth.signOut();
     };
 
     return (
@@ -42,13 +47,13 @@ const Profile: React.FC = () => {
             <View style={styles.profileCard}>
                 <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
                 <View style={styles.cardText}>
-                    <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>Afaan Bilal</Text>
+                    <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>{q.data?.profile.name}</Text>
                     <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@afaanbilal</Text>
+                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@{q.data?.profile.username}</Text>
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
-                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL("https://afaan.dev")}>afaan.dev</Text>
+                        <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL("https://afaan.dev")}>{q.data?.profile.link}</Text>
                     </View>
-                    <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>I never could say anything about myself.</Text>
+                    <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{q.data?.profile.bio}</Text>
                     <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>112 followers</Text>
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
