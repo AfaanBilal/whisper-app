@@ -34,7 +34,7 @@ const RootStack: React.FC = () => {
 
     return (
         <Stack.Navigator>
-            {authenticated ?
+            {!authenticated ?
                 <Stack.Screen name="Tabs" component={BottomTabs} options={{ header: () => <></> }} />
                 :
                 <Stack.Group>
