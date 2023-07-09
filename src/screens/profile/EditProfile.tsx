@@ -12,12 +12,14 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Button, TextInput, Switch, Text } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import SafeScreen from '../../components/SafeScreen';
 import { FontSize, SpacingH, SpacingW } from '../../utils/size';
 import { Fonts } from '../../utils/fonts';
 import ScreenTitle from '../../components/ScreenTitle';
 import { theme } from '../../utils/theme';
+import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 
 type User = {
     name: string;
@@ -29,6 +31,8 @@ type User = {
 };
 
 const EditProfile: React.FC = () => {
+    const navigation = useNavigation<ProfileStackNavProp>();
+
     const [user, setUser] = React.useState<User>({ name: "", link: "", bio: "", image: "", birthday: new Date(), is_private: false });
 
     return (
@@ -48,6 +52,7 @@ const EditProfile: React.FC = () => {
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button mode="contained" uppercase onPress={() => {}} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={false}>Save</Button>
+                    <Button mode="outlined" uppercase onPress={() => navigation.goBack()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={false}>Back</Button>
                 </View>
             </View>
         </SafeScreen>
@@ -81,6 +86,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: "100%",
+        flex: 1,
+        justifyContent: "space-between",
         marginTop: SpacingH.s2,
         paddingHorizontal: SpacingW.s4,
     },
