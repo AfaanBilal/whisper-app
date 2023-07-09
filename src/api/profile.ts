@@ -9,9 +9,10 @@
  */
 
 import axios from 'axios';
+import { User } from '../screens/profile/EditProfile';
 
 const getProfile = async () => (await axios.get('me')).data;
-const updateProfile = async (name: string, bio: string, link: string, birthday: Date, is_private: boolean) => (await axios.put('me', { name, bio, link, birthday, is_private })).data;
+const updateProfile = async ({ name, bio, link, birthday, is_private }: User) => (await axios.put('me', { name, bio, link, birthday, is_private })).data;
 
 export default {
     getProfile,

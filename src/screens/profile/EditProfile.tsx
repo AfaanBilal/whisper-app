@@ -20,8 +20,10 @@ import { Fonts } from '../../utils/fonts';
 import ScreenTitle from '../../components/ScreenTitle';
 import { theme } from '../../utils/theme';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Profile } from '../../api';
 
-type User = {
+export type User = {
     name: string;
     link: string;
     bio: string;
@@ -34,6 +36,19 @@ const EditProfile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
 
     const [user, setUser] = React.useState<User>({ name: "", link: "", bio: "", image: "", birthday: new Date(), is_private: false });
+    const { isLoading, data } = useQuery({
+        queryKey: ['profile'],
+        queryFn: Profile.getProfile,
+        onSuccess: () => {
+            setUser(data.profile);
+        },
+    });
+
+    const qC = useQueryClient();
+    const m = useMutation({
+        mutationFn: async () => { await Profile.updateProfile(user); },
+        onSuccess: () => qC.invalidateQueries({ queryKey: ['profile'] })
+    });
 
     return (
         <SafeScreen>
@@ -51,8 +66,8 @@ const EditProfile: React.FC = () => {
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button mode="contained" uppercase onPress={() => {}} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={false}>Save</Button>
-                    <Button mode="outlined" uppercase onPress={() => navigation.goBack()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={false}>Back</Button>
+                    <Button mode="contained" uppercase onPress={() => m.mutate()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle} loading={m.isLoading}>Save</Button>
+                    <Button mode="outlined" uppercase onPress={() => navigation.goBack()} style={styles.buttonStyle} labelStyle={styles.buttonTextStyle}>Back</Button>
                 </View>
             </View>
         </SafeScreen>
