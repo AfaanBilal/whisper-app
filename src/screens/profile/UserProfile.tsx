@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, IconButton, Menu, Text, ActivityIndicator } from 'react-native-paper';
+import { Avatar, IconButton, Menu, Text, ActivityIndicator, Button, Chip } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
@@ -24,6 +24,7 @@ import Posts from '../Posts';
 import Users from '../Users';
 import { ProfileStackNavProp, ProfileStackParamList } from '../../navigation/ProfileStack';
 import { Users as UserAPI } from '../../api';
+import { theme } from '../../utils/theme';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -35,6 +36,10 @@ const UserProfile: React.FC = () => {
 
     const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['user-profile'], queryFn: () => UserAPI.getUserProfile(route.params.uuid) });
     const [showMenu, setShowMenu] = React.useState(false);
+
+    const handleFollow = () => {
+        // follow
+    };
 
     return (
         <SafeScreen>
@@ -56,6 +61,10 @@ const UserProfile: React.FC = () => {
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.follower_count} followers</Text>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.following_count} following</Text>
+                        </View>
+                        <View style={styles.followContainer}>
+                            {data?.followed ? <Chip icon="check" mode="outlined">Following</Chip> : <Button mode="outlined" style={styles.button} onPress={handleFollow}>Follow</Button>}
+                            {data?.follower && <Chip icon="check" mode="outlined">Follows you</Chip>}
                         </View>
                     </View>
                     <Menu
@@ -113,12 +122,21 @@ const styles = StyleSheet.create({
     cardText: {
     },
     button: {
-        borderRadius: 0,
-        margin: 0,
-        padding: 0,
+        borderRadius: theme.roundness,
     },
     buttonText: {
         fontFamily: Fonts.SourceSansProSemiBold,
+    },
+    followContainer: {
+        marginTop: SpacingH.s1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: SpacingW.s2,
+    },
+    followsYouText: {
+        fontFamily: Fonts.SourceSansPro,
+        backgroundColor: Colors.BLUE,
     },
     private: {
         flex: 1,
@@ -129,5 +147,5 @@ const styles = StyleSheet.create({
     privateText: {
         fontFamily: Fonts.SourceSansProSemiBold,
         color: Colors.DARK_GRAY,
-    }
+    },
 });
