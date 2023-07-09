@@ -11,7 +11,7 @@
 import axios from 'axios';
 
 const signIn = async (email: string, password: string) => axios.post('auth/sign-in', { email, password });
-const signUp = async (name: string, email: string, password: string) => axios.post('auth/sign-up', { name, email, password });
+const signUp = async (name: string, username: string, email: string, password: string) => axios.post('auth/sign-up', { name, username, email, password });
 const signOut = async () => axios.post('auth/sign-out');
 
 export default {

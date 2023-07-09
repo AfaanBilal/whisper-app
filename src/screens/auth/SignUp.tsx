@@ -28,6 +28,7 @@ const SignIn: React.FC = () => {
 
     const [loading, setLoading] = React.useState(false);
     const [name, setName] = React.useState("");
+    const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -44,7 +45,7 @@ const SignIn: React.FC = () => {
         setLoading(true);
 
         try {
-            const r = await Auth.signUp(name, email, password);
+            const r = await Auth.signUp(name, username, email, password);
             setAccessToken(r.data.access_token);
         } catch (e: any) {
             Toast.show({
@@ -62,6 +63,7 @@ const SignIn: React.FC = () => {
 
             <View style={styles.inputContainer}>
                 <TextInput mode="outlined" label="Name" value={name} onChangeText={text => setName(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />
+                <TextInput mode="outlined" label="Username" value={username} onChangeText={text => setUsername(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="at" />} />
                 <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
                 <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
                     secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
