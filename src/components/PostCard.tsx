@@ -46,7 +46,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         }
     };
 
-
     return (
         <View style={styles.container}>
             <View style={styles.postContainer}>
