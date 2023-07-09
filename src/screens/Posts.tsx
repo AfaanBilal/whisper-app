@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import PostCard from '../components/PostCard';
 import { Colors } from '../utils/colors';
@@ -101,7 +101,7 @@ const TEST_DATA = [
 const Posts: React.FC = () => {
     return (
         <FlatList
-            style={styles.container}
+            style={styles.outer}
             contentContainerStyle={styles.container}
             data={TEST_DATA}
             renderItem={({ item }) => <PostCard {...item} />}
@@ -113,6 +113,10 @@ const Posts: React.FC = () => {
 export default Posts;
 
 const styles = StyleSheet.create({
+    outer: {
+        flex: 1,
+        backgroundColor: Colors.DARK,
+    },
     container: {
         backgroundColor: Colors.DARK,
     },
