@@ -28,11 +28,11 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     const qC = useQueryClient();
     const like = useMutation({
         mutationFn: async () => await Posts.likePost(post.uuid),
-        onSuccess: async () => qC.invalidateQueries(['home']),
+        onSuccess: async () => qC.invalidateQueries(),
     });
     const unlike = useMutation({
         mutationFn: async () => await Posts.unlikePost(post.uuid),
-        onSuccess: async () => qC.invalidateQueries(['home']),
+        onSuccess: async () => qC.invalidateQueries(),
     });
 
     const [liked, setLiked] = React.useState(post.liked);
