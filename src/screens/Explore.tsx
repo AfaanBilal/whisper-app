@@ -29,7 +29,7 @@ const Explore: React.FC = () => {
             <ScreenTitle title="Explore" />
             <Searchbar theme={{ colors: { elevation: { level3: Colors.DARK }, outline: Colors.BLUE } }} mode="view" placeholder="Search" onChangeText={q => setSearch(q)} value={search} />
             {isLoading ?
-                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
+                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
                 <Posts posts={data.posts} />
             }
         </SafeScreen>

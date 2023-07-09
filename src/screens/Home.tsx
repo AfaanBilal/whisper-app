@@ -43,7 +43,7 @@ const Home: React.FC = () => {
         <SafeScreen>
             <ScreenTitle title="Whisper" />
             {isLoading ?
-                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
+                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
                 <Posts posts={data.posts} />
             }
             <FAB icon="plus" style={styles.fab} onPress={() => setShowCompose(true)} />
