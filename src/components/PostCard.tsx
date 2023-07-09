@@ -57,8 +57,8 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     </View>
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
                     <View style={styles.actionContainer}>
-                        <IconButton icon={liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={likePress} />
                         <Text variant="labelMedium" style={styles.likes}>{post.likes} like{post.likes == 1 ? "" : "s"}</Text>
+                        <IconButton icon={liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={likePress} />
                     </View>
                 </View>
             </View>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     actionContainer: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         alignItems: "center",
         gap: SpacingW.s0,
     },
