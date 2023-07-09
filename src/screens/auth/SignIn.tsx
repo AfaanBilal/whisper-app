@@ -10,13 +10,13 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-import SafeScreen from '../../components/SafeScreen';
 import { SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
-import ScreenTitle from '../../components/ScreenTitle';
+import AuthScreenTitle from '../../components/AuthScreenTitle';
+import AuthScreen from '../../components/AuthScreen';
 
 const SignIn: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
@@ -26,36 +26,28 @@ const SignIn: React.FC = () => {
     const [passwordVisible, setPasswordVisible] = React.useState(false);
 
     return (
-        <SafeScreen>
-            <View style={styles.container}>
-                <ScreenTitle title="Sign In" />
+        <AuthScreen>
+            <AuthScreenTitle title="Sign In" />
 
-                <View style={styles.inputContainer}>
-                    <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
-                    <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
-                        secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <Button mode="text" onPress={() => navigation.navigate('ResetPassword')}>Forgot Password?</Button>
-                </View>
-
-                <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
-                <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignUp')}>Create an account</Button>
+            <View style={styles.inputContainer}>
+                <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
+                <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
+                    secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
             </View>
-        </SafeScreen>
+
+            <View style={styles.buttonContainer}>
+                <Button mode="text" onPress={() => navigation.navigate('ResetPassword')}>Forgot Password?</Button>
+            </View>
+
+            <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
+            <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignUp')}>Create an account</Button>
+        </AuthScreen>
     );
 };
 
 export default SignIn;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingHorizontal: SpacingW.s1,
-    },
     inputContainer: {
         width: "100%",
         marginTop: SpacingH.s2,
