@@ -58,7 +58,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
                     <View style={styles.actionContainer}>
                         <IconButton icon={liked ? "heart" : "heart-outline"} iconColor={Colors.RED} size={16} onPress={likePress} />
-                        <Text variant="labelMedium" style={styles.likes}>{post.likes} likes</Text>
+                        <Text variant="labelMedium" style={styles.likes}>{post.likes} like{post.likes == 1 ? "" : "s"}</Text>
                     </View>
                 </View>
             </View>
