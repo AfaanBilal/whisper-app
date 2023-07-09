@@ -53,6 +53,9 @@ const Profile: React.FC = () => {
                         fontFamily: Fonts.Ubuntu,
                         color: Colors.WHITE,
                     },
+                    tabBarIndicatorStyle: {
+                        backgroundColor: Colors.RED,
+                    },
                 }}>
                 <Tab.Screen name="Posts" component={Posts} />
                 <Tab.Screen name="Followers" component={Users} />
