@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import SafeScreen from './SafeScreen';
@@ -28,7 +28,7 @@ const AuthScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     {children}
                 </View>
             </View>
-            <Text variant="titleMedium" style={styles.copyright}>&copy; Afaan Bilal</Text>
+            <Text variant="titleMedium" style={styles.copyright} onPress={() => Linking.openURL("https://afaan.dev")}>&copy; Afaan Bilal</Text>
         </SafeScreen>
     );
 };
