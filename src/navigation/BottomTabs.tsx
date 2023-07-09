@@ -9,17 +9,27 @@
  */
 
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialBottomTabNavigationProp, createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 import { Colors } from '../utils/colors';
 import { SpacingH } from '../utils/size';
 import Home from '../screens/Home';
 import Explore from '../screens/Explore';
 import Notifications from '../screens/Notifications';
-import ProfileStack from './ProfileStack';
+import ProfileStack, { ProfileStackParamList } from './ProfileStack';
 
-const Tab = createMaterialBottomTabNavigator();
+export type BottomTabsParamList = {
+    Home: undefined;
+    Explore: undefined;
+    Notifications: undefined;
+    ProfileStack: NavigatorScreenParams<ProfileStackParamList>;
+};
+
+export type BottomTabsNavProp = MaterialBottomTabNavigationProp<BottomTabsParamList>;
+
+const Tab = createMaterialBottomTabNavigator<BottomTabsParamList>();
 
 const BottomTabs: React.FC = () => {
     return (

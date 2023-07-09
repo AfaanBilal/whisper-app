@@ -20,14 +20,14 @@ import { SpacingH, SpacingW } from '../utils/size';
 import { Post } from '../types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Posts } from '../api';
-import { ProfileStackNavProp } from '../navigation/ProfileStack';
+import { BottomTabsNavProp } from '../navigation/BottomTabs';
 
 type PostCardProps = {
     post: Post;
 };
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
-    const navigation = useNavigation<ProfileStackNavProp>();
+    const navigation = useNavigation<BottomTabsNavProp>();
 
     const qC = useQueryClient();
     const like = useMutation({
@@ -56,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <Avatar.Image size={42} source={{ uri: post.author.image || "https://afaan.dev/assets/Afaan.png" }} />
                 <View style={styles.contentContainer}>
                     <View style={styles.top}>
-                        <Text variant="titleMedium" style={styles.author} onPress={() => navigation.push("UserProfile", { uuid: post.author.uuid })}>{post.author.name}</Text>
+                        <Text variant="titleMedium" style={styles.author} onPress={() => navigation.navigate("ProfileStack", { screen: "UserProfile", params: { uuid: post.author.uuid } })}>{post.author.name}</Text>
                         <Text variant="labelMedium" style={styles.timestamp}>{format(new Date(post.created_at))}</Text>
                     </View>
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>
