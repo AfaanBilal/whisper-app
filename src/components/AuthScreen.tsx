@@ -13,7 +13,7 @@ import { StyleSheet, View } from 'react-native';
 
 import SafeScreen from './SafeScreen';
 import ScreenTitle from './ScreenTitle';
-import { SpacingH, SpacingW } from '../utils/size';
+import { Size, SpacingH, SpacingW } from '../utils/size';
 
 const AuthScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         width: "100%",
-        justifyContent: "center",
         alignItems: "center",
+        paddingTop: Size.h10,
     },
 });
