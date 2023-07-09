@@ -17,6 +17,7 @@ import { SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
 import AuthScreenTitle from '../../components/AuthScreenTitle';
 import AuthScreen from '../../components/AuthScreen';
+import AuthButton from '../../components/AuthButton';
 
 const ResetPassword: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
@@ -31,7 +32,7 @@ const ResetPassword: React.FC = () => {
                 <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
             </View>
 
-            <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Reset Password</Button>
+            <AuthButton label="Reset Password" onPress={() => console.log('Pressed')} />
             <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignIn')}>Remember your password? Sign in </Button>
         </AuthScreen>
     );

@@ -13,10 +13,11 @@ import { StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-import { SpacingH, SpacingW } from '../../utils/size';
+import { FontSize, Size, SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
 import AuthScreenTitle from '../../components/AuthScreenTitle';
 import AuthScreen from '../../components/AuthScreen';
+import AuthButton from '../../components/AuthButton';
 
 const SignIn: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
@@ -39,7 +40,7 @@ const SignIn: React.FC = () => {
                 <Button mode="text" onPress={() => navigation.navigate('ResetPassword')}>Forgot Password?</Button>
             </View>
 
-            <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign In</Button>
+            <AuthButton label="Sign In" onPress={() => console.log('Pressed')} />
             <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignUp')}>Create an account</Button>
         </AuthScreen>
     );

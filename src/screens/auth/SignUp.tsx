@@ -17,6 +17,7 @@ import { SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
 import AuthScreenTitle from '../../components/AuthScreenTitle';
 import AuthScreen from '../../components/AuthScreen';
+import AuthButton from '../../components/AuthButton';
 
 const SignIn: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
@@ -37,8 +38,7 @@ const SignIn: React.FC = () => {
                     secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
             </View>
 
-            <Button mode="contained" uppercase onPress={() => console.log('Pressed')}>Sign Up</Button>
-
+            <AuthButton label="Sign Up" onPress={() => console.log('Pressed')} />
             <Button mode="text" style={{ marginTop: SpacingH.s3 }} onPress={() => navigation.navigate('SignIn')}>Have an account? Sign In</Button>
         </AuthScreen>
     );
