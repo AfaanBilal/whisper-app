@@ -43,7 +43,7 @@ const EditProfile: React.FC = () => {
                 <View style={styles.inputContainer}>
                     <TextInput mode="outlined" label="Name" value={user.name} onChangeText={text => setUser({ ...user, name: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />
                     <TextInput mode="outlined" label="Link" value={user.link} onChangeText={text => setUser({ ...user, link: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="link" />} />
-                    <TextInput mode="outlined" label="Bio" value={user.bio} onChangeText={text => setUser({ ...user, bio: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="text-box-outline" />} />
+                    <TextInput mode="outlined" label="Bio" multiline value={user.bio} onChangeText={text => setUser({ ...user, bio: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="text-box-outline" />} />
                     <View style={styles.switchContainer}>
                         <Entypo name="lock" size={24} color={theme.colors.secondary} />
                         <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Private</Text>
