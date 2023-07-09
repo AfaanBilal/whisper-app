@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, Text, Button } from 'react-native-paper';
+import { Avatar, Text, IconButton, Menu, Button, Divider } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
 
@@ -21,11 +21,21 @@ import { Fonts } from '../../utils/fonts';
 import Posts from '../Posts';
 import Users from '../Users';
 import { ProfileStackNavProp } from '../../navigation/ProfileStack';
+import { Auth } from '../../api';
+import { AuthContext } from '../../utils/AuthContext';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Profile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
+    const { setAccessToken } = React.useContext(AuthContext);
+
+    const [showMenu, setShowMenu] = React.useState(false);
+    const handleSignOut = async () => {
+        setShowMenu(false);
+        await Auth.signOut();
+        setAccessToken(null);
+    };
 
     return (
         <SafeScreen>
@@ -44,11 +54,17 @@ const Profile: React.FC = () => {
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
                         <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>73 following</Text>
                     </View>
-                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text variant="titleMedium" style={{ flex: 1, fontFamily: Fonts.SourceSansPro, color: Colors.RED, paddingVertical: SpacingH.s0 }} onPress={() => navigation.push('EditProfile')}>Edit Profile</Text>
-                        <Text variant="titleMedium" style={{ flex: 1, fontFamily: Fonts.SourceSansPro, color: Colors.RED, paddingVertical: SpacingH.s0 }} onPress={() => Linking.openURL("https://afaan.dev")}>Share Profile</Text>
-                    </View>
                 </View>
+                <Menu
+                    visible={showMenu}
+                    onDismiss={() => setShowMenu(false)}
+                    theme={{ colors: { elevation: { level2: Colors.DARK } } }}
+                    anchor={<IconButton icon="menu" iconColor={Colors.SOFT_WHITE} size={24} style={{ marginTop: -SpacingH.s0 }} onPress={() => setShowMenu(true)} />}>
+                    <Menu.Item onPress={() => { setShowMenu(false); navigation.push('EditProfile'); }} title="Edit Profile" />
+                    <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" />
+                    <Divider />
+                    <Menu.Item onPress={handleSignOut} title="Sign Out" />
+                </Menu>
             </View>
 
             <Tab.Navigator
@@ -82,10 +98,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingHorizontal: SpacingW.s2,
         paddingVertical: SpacingH.s2,
-        gap: SpacingW.s6,
+        gap: SpacingW.s4,
+        alignItems: "flex-start",
     },
     cardText: {
-        justifyContent: "center",
     },
     button: {
         borderRadius: 0,

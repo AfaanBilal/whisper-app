@@ -14,6 +14,6 @@ import auth from './auth';
 axios.defaults.baseURL = 'http://192.168.29.229:8080/';
 axios.defaults.timeout = 5000;
 
-export const setAuthToken = (token: string) => { axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; }
+export const setAuthToken = (token: string | null) => { axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; }
 
 export const Auth = auth;

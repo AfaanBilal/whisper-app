@@ -15,16 +15,24 @@ import { PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 import { theme } from './src/utils/theme';
-import { AuthContext, loadAccessToken, saveAccessToken } from './src/utils/AuthContext';
+import { AuthContext, loadAccessToken, removeAccessToken, saveAccessToken } from './src/utils/AuthContext';
 import RootStack from './src/navigation/RootStack';
 import { Fonts } from './src/utils/fonts';
+import { setAuthToken } from './src/api';
 
 export default function App() {
     const [accessToken, setAccessToken] = React.useState<string | null>(null);
     React.useEffect(() => { (async () => { setAccessToken(await loadAccessToken()); })(); }, []);
-    const setAccessTokenPersisted = (token: string) => {
+    const setAccessTokenPersisted = (token: string | null) => {
         setAccessToken(token);
-        (async () => { await saveAccessToken(token); })();
+        setAuthToken(token);
+        (async () => {
+            if (token) {
+                await saveAccessToken(token);
+            } else {
+                await removeAccessToken();
+            }
+        })();
     };
 
     const [fontsLoaded] = useFonts({
