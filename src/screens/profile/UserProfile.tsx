@@ -10,10 +10,11 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, Text, IconButton, Menu, Button, ActivityIndicator } from 'react-native-paper';
+import { Avatar, IconButton, Menu, Text, ActivityIndicator } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
+import { Entypo } from '@expo/vector-icons';
 
 import SafeScreen from '../../components/SafeScreen';
 import { Colors } from '../../utils/colors';
@@ -69,7 +70,7 @@ const UserProfile: React.FC = () => {
                 </View>
             }
 
-            {data?.followed &&
+            {data?.followed ?
                 <Tab.Navigator
                     style={{ flex: 1, backgroundColor: Colors.DARK }}
                     screenOptions={{
@@ -87,7 +88,11 @@ const UserProfile: React.FC = () => {
                     <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} isFetching={isFetching} refetch={refetch} />}</Tab.Screen>
                     <Tab.Screen name="Followers" component={Users} />
                     <Tab.Screen name="Following" component={Users} />
-                </Tab.Navigator>
+                </Tab.Navigator> :
+                <View style={styles.private}>
+                    <Entypo name="lock" size={56} color={Colors.DARK_GRAY} />
+                    <Text variant="titleMedium" style={styles.privateText}>Private Account</Text>
+                </View>
             }
         </SafeScreen>
     );
@@ -115,4 +120,14 @@ const styles = StyleSheet.create({
     buttonText: {
         fontFamily: Fonts.SourceSansProSemiBold,
     },
+    private: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        gap: SpacingH.s2,
+    },
+    privateText: {
+        fontFamily: Fonts.SourceSansProSemiBold,
+        color: Colors.DARK_GRAY,
+    }
 });
