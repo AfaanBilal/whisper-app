@@ -13,7 +13,7 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, Menu, Text, ActivityIndicator, Button, Chip, Appbar } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Entypo } from '@expo/vector-icons';
 
 import SafeScreen from '../../components/SafeScreen';
@@ -33,13 +33,20 @@ type UserProfileRouteProp = RouteProp<ProfileStackParamList, 'UserProfile'>;
 const UserProfile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
     const route = useRoute<UserProfileRouteProp>();
+    const uuid = route.params.uuid;
 
-    const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['user-profile'], queryFn: () => UserAPI.getUserProfile(route.params.uuid) });
+    const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['user-profile', uuid], queryFn: () => UserAPI.getUserProfile(uuid) });
     const [showMenu, setShowMenu] = React.useState(false);
 
-    const handleFollow = () => {
-        // follow
-    };
+    const qC = useQueryClient();
+    const follow = useMutation({
+        mutationFn: async () => await UserAPI.followUser(uuid),
+        onSuccess: async () => qC.invalidateQueries(['user-profile', uuid]),
+    });
+    const unfollow = useMutation({
+        mutationFn: async () => await UserAPI.unfollowUser(uuid),
+        onSuccess: async () => qC.invalidateQueries(['user-profile', uuid]),
+    });
 
     return (
         <SafeScreen>
@@ -66,7 +73,7 @@ const UserProfile: React.FC = () => {
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.following_count} following</Text>
                         </View>
                         <View style={styles.followContainer}>
-                            {data?.followed ? <Chip icon="check" mode="outlined">Following</Chip> : <Button mode="outlined" style={styles.button} onPress={handleFollow}>Follow</Button>}
+                            {data?.followed ? <Chip icon="check" mode="outlined">Following</Chip> : <Button mode="outlined" style={styles.button} onPress={() => follow.mutate()} loading={follow.isLoading}>Follow</Button>}
                             {data?.follower && <Chip icon="check" mode="outlined">Follows you</Chip>}
                         </View>
                     </View>
@@ -75,7 +82,7 @@ const UserProfile: React.FC = () => {
                         onDismiss={() => setShowMenu(false)}
                         theme={{ colors: { elevation: { level2: Colors.DARK } } }}
                         anchor={<IconButton icon="menu" iconColor={Colors.SOFT_WHITE} size={24} style={{ marginTop: -SpacingH.s0 }} onPress={() => setShowMenu(true)} />}>
-                        {data?.followed && <Menu.Item onPress={() => { setShowMenu(false); }} title="Unfollow" leadingIcon="account" />}
+                        {data?.followed && <Menu.Item onPress={() => { setShowMenu(false); unfollow.mutate(); }} title="Unfollow" leadingIcon="account" />}
                         {data?.follower && <Menu.Item onPress={() => { setShowMenu(false); }} title="Remove follower" leadingIcon="account" />}
                         <Menu.Item onPress={() => { setShowMenu(false); Linking.openURL("https://afaan.dev"); }} title="Share Profile" leadingIcon="share" />
                     </Menu>
