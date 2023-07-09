@@ -70,7 +70,7 @@ const UserProfile: React.FC = () => {
                 </View>
             }
 
-            {data?.followed ?
+            {!data?.profile.is_private || data?.followed ?
                 <Tab.Navigator
                     style={{ flex: 1, backgroundColor: Colors.DARK }}
                     screenOptions={{
