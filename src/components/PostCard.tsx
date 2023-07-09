@@ -12,6 +12,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, Text } from 'react-native-paper';
 import { format } from 'timeago.js';
+import { useNavigation } from '@react-navigation/native';
 
 import { Colors } from '../utils/colors';
 import { Fonts } from '../utils/fonts';
@@ -19,12 +20,15 @@ import { SpacingH, SpacingW } from '../utils/size';
 import { Post } from '../types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Posts } from '../api';
+import { ProfileStackNavProp } from '../navigation/ProfileStack';
 
 type PostCardProps = {
     post: Post;
 };
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+    const navigation = useNavigation<ProfileStackNavProp>();
+
     const qC = useQueryClient();
     const like = useMutation({
         mutationFn: async () => await Posts.likePost(post.uuid),
@@ -52,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <Avatar.Image size={42} source={{ uri: post.author.image || "https://afaan.dev/assets/Afaan.png" }} />
                 <View style={styles.contentContainer}>
                     <View style={styles.top}>
-                        <Text variant="titleMedium" style={styles.author}>{post.author.name}</Text>
+                        <Text variant="titleMedium" style={styles.author} onPress={() => navigation.push("UserProfile", { uuid: post.author.uuid })}>{post.author.name}</Text>
                         <Text variant="labelMedium" style={styles.timestamp}>{format(new Date(post.created_at))}</Text>
                     </View>
                     <Text variant="titleMedium" style={styles.postContent}>{post.content}</Text>

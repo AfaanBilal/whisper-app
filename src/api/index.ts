@@ -13,6 +13,7 @@ import auth from './auth';
 import profile from './profile';
 import home from './home';
 import posts from './posts';
+import users from './users';
 
 axios.defaults.baseURL = 'http://192.168.29.229:8080/';
 axios.defaults.timeout = 5000;
@@ -23,3 +24,4 @@ export const Auth = auth;
 export const Profile = profile;
 export const Home = home;
 export const Posts = posts;
+export const Users = users;
