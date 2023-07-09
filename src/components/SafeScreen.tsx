@@ -10,8 +10,7 @@
 
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { Colors } from '../utils/colors';
 
 const SafeScreen: React.FC<{ children: React.ReactNode }> = ({ children }) => {
