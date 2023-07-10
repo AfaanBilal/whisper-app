@@ -9,10 +9,11 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { ActivityIndicator, FAB, Portal } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FAB, Portal, Text } from 'react-native-paper';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { Entypo } from '@expo/vector-icons';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
@@ -22,6 +23,7 @@ import { SpacingH } from '../utils/size';
 import { Home as HomeAPI } from '../api';
 import ModalCompose from '../components/ModalCompose';
 import { Posts as PostAPI } from '../api';
+import { Fonts } from '../utils/fonts';
 
 const Home: React.FC = () => {
     const [showCompose, setShowCompose] = React.useState(false);
@@ -44,7 +46,14 @@ const Home: React.FC = () => {
             <ScreenTitle title="Whisper" />
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
-                <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />
+                (data?.posts && <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />)
+            }
+            {!isLoading && !data.posts &&
+                <View style={styles.empty}>
+                    <Entypo name="feather" size={64} color={Colors.RED} />
+                    <Text variant="titleLarge" style={styles.emptyText}>Welcome to Whisper</Text>
+                    <Text variant="titleSmall" style={styles.emptyText}>Create your first post or explore to follow some people.</Text>
+                </View>
             }
             <FAB icon="plus" style={styles.fab} onPress={() => setShowCompose(true)} />
             <Portal>
@@ -63,5 +72,15 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         backgroundColor: Colors.RED,
+    },
+    empty: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: SpacingH.s2,
+    },
+    emptyText: {
+        fontFamily: Fonts.SourceSansProSemiBold,
+        color: Colors.DARK_GRAY,
     },
 });

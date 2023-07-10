@@ -32,7 +32,7 @@ const ModalCompose: React.FC<{ show: boolean, setShow: (s: boolean) => void, onP
 
     return (
         <Modal visible={show} onDismiss={() => setShow(false)} contentContainerStyle={styles.composeContainerStyle}>
-            <Text variant="titleLarge" style={styles.title}>Compose</Text>
+            <Text variant="titleLarge" style={styles.title}>Compose a whisper</Text>
             <TextInput label="What's on your mind?" mode="outlined" multiline={true} style={styles.input} value={content} onChangeText={text => setContent(text)} />
             <View style={styles.buttonContainer}>
                 <Button compact onPress={() => setShow(false)} style={styles.buttonStyle}>Cancel</Button>
