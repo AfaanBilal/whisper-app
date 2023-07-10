@@ -9,82 +9,29 @@
  */
 
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 
 import UserCard from '../components/UserCard';
 import { Colors } from '../utils/colors';
+import { UserResource } from '../types';
+import EmptyList from '../components/EmptyList';
 
-const TEST_DATA = [
-    {
-        uuid: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "58694a0f-3da1-471f-bd96-145571e29d72",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b1",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "3ac68afc-c605-48d3-a4f8-fbd91aa97f62",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "58694a0f-3da1-471f-bd96-145571e29d73",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b4",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "3ac68afc-c605-48d3-a4f8-fbd91aa97f65",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "58694a0f-3da1-471f-bd96-145571e29d76",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b7",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "3ac68afc-c605-48d3-a4f8-fbd91aa97f68",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-    {
-        uuid: "58694a0f-3da1-471f-bd96-145571e29d79",
-        name: "Afaan Bilal",
-        username: "afaanbilal",
-    },
-];
+type UserProps = {
+    users: UserResource[];
+    isFetching: boolean;
+    refetch: () => void;
+};
 
-const Users: React.FC = () => {
+const Users: React.FC<UserProps> = ({ users, isFetching, refetch }) => {
     return (
         <FlatList
+            refreshControl={<RefreshControl colors={[Colors.SOFT_WHITE]} tintColor={Colors.SOFT_WHITE} refreshing={isFetching} onRefresh={() => refetch()} />}
             style={styles.container}
             contentContainerStyle={styles.container}
-            data={TEST_DATA}
+            data={users}
             renderItem={({ item }) => <UserCard {...item} />}
             keyExtractor={item => item.uuid}
+            ListEmptyComponent={<EmptyList />}
         />
     );
 };

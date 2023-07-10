@@ -116,8 +116,8 @@ const UserProfile: React.FC = () => {
                         },
                     }}>
                     <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} isFetching={isFetching} refetch={refetch} />}</Tab.Screen>
-                    <Tab.Screen name="Followers" component={Users} />
-                    <Tab.Screen name="Following" component={Users} />
+                    <Tab.Screen name="Followers">{props => <Users users={[]} isFetching={false} refetch={() => {}} {...props} />}</Tab.Screen>
+                    <Tab.Screen name="Following">{props => <Users users={[]} isFetching={false} refetch={() => {}} {...props} />}</Tab.Screen>
                 </Tab.Navigator> :
                 <View style={styles.private}>
                     <Entypo name="lock" size={56} color={Colors.DARK_GRAY} />

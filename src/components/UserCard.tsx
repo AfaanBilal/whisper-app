@@ -11,16 +11,22 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Text } from 'react-native-paper';
+
 import { Colors } from '../utils/colors';
 import { SpacingH, SpacingW } from '../utils/size';
 import { Fonts } from '../utils/fonts';
+import { UserResource } from '../types';
+import { useNavigation } from '@react-navigation/native';
+import { BottomTabsNavProp } from '../navigation/BottomTabs';
 
-const UserCard: React.FC<{ name: string, username: string }> = ({ name, username }) => {
+const UserCard: React.FC<UserResource> = ({ uuid, name, username, image }) => {
+    const navigation = useNavigation<BottomTabsNavProp>();
+
     return (
         <View style={styles.container}>
-            <Avatar.Image size={48} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
+            <Avatar.Image size={48} source={{ uri: image || "https://afaan.dev/assets/Afaan.png" }} />
             <View>
-                <Text variant="titleLarge" style={styles.name}>{name}</Text>
+                <Text variant="titleLarge" style={styles.name} onPress={() => navigation.navigate("ProfileStack", { screen: "UserProfile", params: { uuid } })}>{name}</Text>
                 <Text variant="titleMedium" style={styles.username}>@{username}</Text>
             </View>
         </View>
