@@ -46,15 +46,15 @@ const Profile: React.FC = () => {
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
                 <View style={styles.profileCard}>
-                    <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
+                    <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} style={styles.avatar} />
                     <View style={styles.cardText}>
-                        <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
+                        <Text variant="headlineLarge" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@{data?.profile.username}</Text>
-                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
-                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL("https://afaan.dev")}>{data?.profile.link}</Text>
+                            {data?.profile.link && <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>}
+                            {data?.profile.link && <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL(data?.profile.link)}>{data?.profile.link}</Text>}
                         </View>
-                        <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{data?.profile.bio}</Text>
+                        {data?.profile.bio && <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{data?.profile.bio}</Text>}
                         <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>{data?.post_count} posts</Text>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
@@ -64,6 +64,7 @@ const Profile: React.FC = () => {
                         </View>
                     </View>
                     <Menu
+                        style={styles.menu}
                         visible={showMenu}
                         onDismiss={() => setShowMenu(false)}
                         theme={{ colors: { elevation: { level2: Colors.DARK } } }}
@@ -110,12 +111,20 @@ const styles = StyleSheet.create({
         gap: SpacingW.s4,
         alignItems: "flex-start",
     },
+    avatar: {
+        flex: 0,
+    },
     cardText: {
+        flex: 2,
+        flexGrow: 1,
     },
     button: {
         borderRadius: 0,
         margin: 0,
         padding: 0,
+    },
+    menu: {
+        flex: 1,
     },
     buttonText: {
         fontFamily: Fonts.SourceSansProSemiBold,

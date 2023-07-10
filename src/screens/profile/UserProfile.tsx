@@ -58,10 +58,10 @@ const UserProfile: React.FC = () => {
                 <View style={styles.profileCard}>
                     <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
                     <View style={styles.cardText}>
-                        <Text variant="displaySmall" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
+                        <Text variant="headlineLarge" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
                             <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>@{data?.profile.username}</Text>
-                            <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>
+                            {data?.profile.link && <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro }}>&middot;</Text>}
                             {data?.profile.link && <Text variant="titleMedium" style={{ fontFamily: Fonts.SourceSansPro, color: Colors.RED }} onPress={() => Linking.openURL(data?.profile.link)}>{data?.profile.link}</Text>}
                         </View>
                         {data?.profile.bio && <Text variant="titleSmall" style={{ marginVertical: SpacingH.s0, fontFamily: Fonts.Ubuntu }}>{data?.profile.bio}</Text>}
@@ -84,6 +84,7 @@ const UserProfile: React.FC = () => {
                         </View>
                     </View>
                     <Menu
+                        style={styles.menu}
                         visible={showMenu}
                         onDismiss={() => setShowMenu(false)}
                         theme={{ colors: { elevation: { level2: Colors.DARK } } }}
@@ -136,6 +137,11 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
     },
     cardText: {
+        flex: 2,
+        flexGrow: 1,
+    },
+    menu: {
+        flex: 1,
     },
     button: {
         borderRadius: theme.roundness,
