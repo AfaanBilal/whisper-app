@@ -39,6 +39,8 @@ const UserProfile: React.FC = () => {
     const [showMenu, setShowMenu] = React.useState(false);
 
     const qC = useQueryClient();
+    const followers = useQuery({ queryKey: ['followers', uuid], queryFn: () => UserAPI.getFollowers(uuid) });
+    const following = useQuery({ queryKey: ['following', uuid], queryFn: () => UserAPI.getFollowing(uuid) });
     const follow = useMutation({
         mutationFn: async () => await UserAPI.followUser(uuid),
         onSuccess: async () => qC.invalidateQueries(['user-profile', uuid]),
@@ -116,8 +118,8 @@ const UserProfile: React.FC = () => {
                         },
                     }}>
                     <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} isFetching={isFetching} refetch={refetch} />}</Tab.Screen>
-                    <Tab.Screen name="Followers">{props => <Users users={[]} isFetching={false} refetch={() => {}} {...props} />}</Tab.Screen>
-                    <Tab.Screen name="Following">{props => <Users users={[]} isFetching={false} refetch={() => {}} {...props} />}</Tab.Screen>
+                    <Tab.Screen name="Followers">{props => <Users users={followers.data?.followers || []} isFetching={followers.isFetching} refetch={followers.refetch} {...props} />}</Tab.Screen>
+                    <Tab.Screen name="Following">{props => <Users users={following.data?.following || []} isFetching={following.isFetching} refetch={following.refetch} {...props} />}</Tab.Screen>
                 </Tab.Navigator> :
                 <View style={styles.private}>
                     <Entypo name="lock" size={56} color={Colors.DARK_GRAY} />
