@@ -67,7 +67,7 @@ const EditProfile: React.FC = () => {
                         <View style={styles.switchContainer}>
                             <Entypo name="calendar" size={24} color={theme.colors.secondary} />
                             <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Date of Birth</Text>
-                            <DateTimePicker mode="date" textColor={Colors.SOFT_WHITE} value={new Date(user.birthday).getFullYear() < 1900 ? new Date() : new Date(user.birthday)} onChange={(e, d) => setUser({ ...user, birthday: d?.toISOString() || "" })} />
+                            <DateTimePicker mode="date" themeVariant="dark" textColor={Colors.SOFT_WHITE} value={new Date(user.birthday).getFullYear() < 1900 ? new Date() : new Date(user.birthday)} onChange={(e, d) => setUser({ ...user, birthday: d?.toISOString() || "" })} />
                         </View>
                     </View>
                     <View style={styles.buttonContainer}>
