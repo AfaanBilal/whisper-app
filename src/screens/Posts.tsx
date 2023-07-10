@@ -14,6 +14,7 @@ import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 import PostCard from '../components/PostCard';
 import { Colors } from '../utils/colors';
 import { Post } from '../types';
+import EmptyList from '../components/EmptyList';
 
 type PostProps = {
     posts: Post[];
@@ -30,6 +31,7 @@ const Posts: React.FC<PostProps> = ({ posts, isFetching, refetch }) => {
             data={posts}
             renderItem={({ item }) => <PostCard post={item} />}
             keyExtractor={item => item.uuid}
+            ListEmptyComponent={<EmptyList />}
         />
     );
 };
