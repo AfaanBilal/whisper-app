@@ -14,9 +14,13 @@ import { User } from '../types';
 const getProfile = async () => (await axios.get('me')).data;
 const updateProfile = async ({ name, bio, link, image, birthday, is_private }: User) => (await axios.put('me', { name, bio, link, image, birthday, is_private })).data;
 const getNotifications = async () => (await axios.get('/me/notifications')).data;
+const acceptFollower = async (uuid: string) => (await axios.post('/me/followers/' + uuid + '/accept')).data;
+const rejectFollower = async (uuid: string) => (await axios.post('/me/followers/' + uuid + '/reject')).data;
 
 export default {
     getProfile,
     updateProfile,
     getNotifications,
+    acceptFollower,
+    rejectFollower,
 };

@@ -9,6 +9,7 @@
  */
 
 export type User = {
+    uuid: string;
     name: string;
     link: string;
     bio: string;

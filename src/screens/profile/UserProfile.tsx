@@ -47,6 +47,10 @@ const UserProfile: React.FC = () => {
         mutationFn: async () => await UserAPI.unfollowUser(uuid),
         onSuccess: async () => qC.invalidateQueries(['user-profile', uuid]),
     });
+    const cancelFollow = useMutation({
+        mutationFn: async () => await UserAPI.cancelFollowRequest(uuid),
+        onSuccess: async () => qC.invalidateQueries(['user-profile', uuid]),
+    });
 
     return (
         <SafeScreen>
@@ -76,7 +80,7 @@ const UserProfile: React.FC = () => {
                             {data?.followed ?
                                 <Chip icon="check" mode="outlined">Following</Chip> :
                                 (data?.requested ?
-                                    <Chip icon="clock" mode="outlined">Requested</Chip> :
+                                    <Chip icon="clock" mode="outlined" onPress={() => cancelFollow.mutate()}>Requested</Chip> :
                                     <Button mode="outlined" style={styles.button} onPress={() => follow.mutate()} loading={follow.isLoading}>Follow</Button>
                                 )
                             }
