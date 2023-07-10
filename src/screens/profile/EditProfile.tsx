@@ -15,6 +15,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import SafeScreen from '../../components/SafeScreen';
 import { FontSize, SpacingH, SpacingW } from '../../utils/size';
@@ -62,6 +63,11 @@ const EditProfile: React.FC = () => {
                             <Entypo name="lock" size={24} color={theme.colors.secondary} />
                             <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Private</Text>
                             <Switch value={user.is_private} onValueChange={value => setUser({ ...user, is_private: value })} />
+                        </View>
+                        <View style={styles.switchContainer}>
+                            <Entypo name="calendar" size={24} color={theme.colors.secondary} />
+                            <Text variant="titleMedium" style={{ flex: 1, paddingLeft: SpacingW.s4 }}>Date of Birth</Text>
+                            <DateTimePicker mode="date" textColor={Colors.SOFT_WHITE} value={new Date(user.birthday).getFullYear() < 1900 ? new Date() : new Date(user.birthday)} onChange={(e, d) => setUser({ ...user, birthday: d?.toISOString() || "" })} />
                         </View>
                     </View>
                     <View style={styles.buttonContainer}>

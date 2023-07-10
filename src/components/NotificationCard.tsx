@@ -18,12 +18,12 @@ import { Fonts } from '../utils/fonts';
 import { SpacingH, SpacingW } from '../utils/size';
 import { theme } from '../utils/theme';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { User } from '../types';
+import { UserResource } from '../types';
 import { Profile } from '../api';
 
 type NotificationCardProps = {
     id: number;
-    user: User;
+    user: UserResource;
     type: string;
     message: string;
     created_at: string;

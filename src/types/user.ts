@@ -9,11 +9,18 @@
  */
 
 export type User = {
-    uuid: string;
     name: string;
     link: string;
     bio: string;
     image: string;
     birthday: string;
+    is_private: boolean;
+};
+
+export type UserResource = {
+    uuid: string;
+    name: string;
+    username: string;
+    image: string;
     is_private: boolean;
 };
