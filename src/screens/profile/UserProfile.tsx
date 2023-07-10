@@ -55,7 +55,7 @@ const UserProfile: React.FC = () => {
     return (
         <SafeScreen>
             <Appbar style={{ backgroundColor: Colors.DARK }}>
-                <Appbar.BackAction onPress={() => navigation.goBack()} />
+                <Appbar.BackAction onPress={() => navigation.navigate("Profile")} />
             </Appbar>
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
