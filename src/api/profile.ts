@@ -16,6 +16,8 @@ const updateProfile = async ({ name, bio, link, image, birthday, is_private }: U
 const getNotifications = async () => (await axios.get('/me/notifications')).data;
 const acceptFollower = async (uuid: string) => (await axios.post('/me/followers/' + uuid + '/accept')).data;
 const rejectFollower = async (uuid: string) => (await axios.post('/me/followers/' + uuid + '/reject')).data;
+const getFollowers = async () => (await axios.get('/me/followers')).data;
+const getFollowing = async () => (await axios.get('/me/following')).data;
 
 export default {
     getProfile,
@@ -23,4 +25,6 @@ export default {
     getNotifications,
     acceptFollower,
     rejectFollower,
+    getFollowers,
+    getFollowing,
 };

@@ -33,6 +33,8 @@ const Profile: React.FC = () => {
     const { setAccessToken } = React.useContext(AuthContext);
 
     const { isLoading, data, isFetching, refetch } = useQuery({ queryKey: ['profile'], queryFn: ProfileAPI.getProfile });
+    const followers = useQuery({ queryKey: ['followers'], queryFn: ProfileAPI.getFollowers });
+    const following = useQuery({ queryKey: ['following'], queryFn: ProfileAPI.getFollowing });
 
     const [showMenu, setShowMenu] = React.useState(false);
     const handleSignOut = async () => {
@@ -91,9 +93,9 @@ const Profile: React.FC = () => {
                         backgroundColor: Colors.RED,
                     },
                 }}>
-                <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} {...props} isFetching={isFetching} refetch={refetch} />}</Tab.Screen>
-                <Tab.Screen name="Followers" component={Users} />
-                <Tab.Screen name="Following" component={Users} />
+                <Tab.Screen name="Posts">{props => <Posts posts={data?.posts || []} isFetching={isFetching} refetch={refetch} {...props} />}</Tab.Screen>
+                <Tab.Screen name="Followers">{props => <Users users={followers.data?.followers || []} isFetching={followers.isFetching} refetch={followers.refetch} {...props} />}</Tab.Screen>
+                <Tab.Screen name="Following">{props => <Users users={following.data?.following || []} isFetching={following.isFetching} refetch={following.refetch} {...props} />}</Tab.Screen>
             </Tab.Navigator>
         </SafeScreen>
     );
