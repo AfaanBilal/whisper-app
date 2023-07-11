@@ -10,13 +10,12 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Screenshots
 
-|        ![SignIn](/screenshots/1-SignIn.png)        |      ![SignUp](/screenshots/2-SignUp.png)       |
-| :------------------------------------------------: | :---------------------------------------------: |
-| ![ResetPassword](/screenshots/3-ResetPassword.png) |      ![Home](/screenshots/3.5-Welcome.png)      |
-|          ![Home](/screenshots/4-Home.png)          |     ![Compose](/screenshots/5-Compose.png)      |
-|       ![Explore](/screenshots/6-Explore.png)       | ![Compose](/screenshots/6.5-Notifications.png)  |
-| ![Notifications](/screenshots/7-Notifications.png) |     ![Profile](/screenshots/8-Profile.png)      |
-|          ![Menu](/screenshots/9-Menu.png)          | ![EditProfile](/screenshots/10-EditProfile.png) |
+|              ![SignIn](/screenshots/SignIn.png)              |             ![SignUp](/screenshots/SignUp.png)             |        ![Reset Password](/screenshots/ResetPassword.png)         |
+| :----------------------------------------------------------: | :--------------------------------------------------------: | :--------------------------------------------------------------: |
+|             ![Welcome](/screenshots/Welcome.png)             |               ![Home](/screenshots/Home.png)               |               ![Compose](/screenshots/Compose.png)               |
+|             ![Explore](/screenshots/Explore.png)             |     ![Explore Search](/screenshots/Explore-Search.png)     |          ![User Profile](/screenshots/UserProfile.png)           |
+| ![Notifications Empty](/screenshots/Notifications-Empty.png) | ![Notifications List](/screenshots/Notifications-List.png) | ![Notifications Request](/screenshots/Notifications-Request.png) |
+|             ![Profile](/screenshots/Profile.png)             |       ![Profile Menu](/screenshots/Profile-Menu.png)       |          ![Edit Profile](/screenshots/EditProfile.png)           |
 
 ---
 

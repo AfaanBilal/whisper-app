@@ -40,12 +40,14 @@ const Explore: React.FC = () => {
             {search != "" &&
                 (searchQ.isFetching ?
                     <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
-                    <Users users={searchQ.data.users} isFetching={searchQ.isFetching} refetch={searchQ.refetch} />
+                    <Users users={searchQ.data?.users} isFetching={searchQ.isFetching} refetch={searchQ.refetch} />
                 )
             }
-            {isLoading ?
-                <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
-                <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />
+            {search == "" &&
+                (isLoading ?
+                    <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s6 }} /> :
+                    <Posts posts={data.posts} isFetching={isFetching} refetch={refetch} />
+                )
             }
         </SafeScreen>
     );
