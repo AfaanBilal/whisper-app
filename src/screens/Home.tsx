@@ -17,7 +17,7 @@ import { Entypo } from '@expo/vector-icons';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
-import Posts from './Posts';
+import Posts from '../components/Posts';
 import { Colors } from '../utils/colors';
 import { SpacingH } from '../utils/size';
 import { Home as HomeAPI } from '../api';

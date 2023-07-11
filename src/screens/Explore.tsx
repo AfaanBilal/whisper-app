@@ -15,11 +15,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import SafeScreen from '../components/SafeScreen';
 import ScreenTitle from '../components/ScreenTitle';
-import Posts from './Posts';
+import Posts from '../components/Posts';
 import { Colors } from '../utils/colors';
 import { Home } from '../api';
 import { SpacingH } from '../utils/size';
-import Users from './Users';
+import Users from '../components/Users';
 
 const Explore: React.FC = () => {
     const [search, setSearch] = React.useState('');

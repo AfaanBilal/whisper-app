@@ -11,34 +11,38 @@
 import React from 'react';
 import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 
-import UserCard from '../components/UserCard';
+import PostCard from './PostCard';
 import { Colors } from '../utils/colors';
-import { UserResource } from '../types';
-import EmptyList from '../components/EmptyList';
+import { Post } from '../types';
+import EmptyList from './EmptyList';
 
-type UserProps = {
-    users: UserResource[];
+type PostProps = {
+    posts: Post[];
     isFetching: boolean;
     refetch: () => void;
 };
 
-const Users: React.FC<UserProps> = ({ users, isFetching, refetch }) => {
+const Posts: React.FC<PostProps> = ({ posts, isFetching, refetch }) => {
     return (
         <FlatList
             refreshControl={<RefreshControl colors={[Colors.SOFT_WHITE]} tintColor={Colors.SOFT_WHITE} refreshing={isFetching} onRefresh={() => refetch()} />}
-            style={styles.container}
+            style={styles.outer}
             contentContainerStyle={styles.container}
-            data={users}
-            renderItem={({ item }) => <UserCard {...item} />}
+            data={posts}
+            renderItem={({ item }) => <PostCard post={item} />}
             keyExtractor={item => item.uuid}
             ListEmptyComponent={<EmptyList />}
         />
     );
 };
 
-export default Users;
+export default Posts;
 
 const styles = StyleSheet.create({
+    outer: {
+        flex: 1,
+        backgroundColor: Colors.DARK,
+    },
     container: {
         backgroundColor: Colors.DARK,
     },
