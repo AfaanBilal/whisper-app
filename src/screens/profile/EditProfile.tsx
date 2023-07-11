@@ -42,8 +42,8 @@ const EditProfile: React.FC = () => {
     const qC = useQueryClient();
     const m = useMutation({
         mutationFn: async () => await Profile.updateProfile(user),
-        onSuccess: async (data) => {
-            qC.setQueryData(['profile'], data);
+        onSuccess: async (d) => {
+            qC.setQueryData(['profile'], { ...data, profile: d.profile });
             Toast.show({ type: 'success', text1: 'Profile updated.', visibilityTime: 1000 });
         },
     });
