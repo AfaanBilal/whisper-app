@@ -10,10 +10,11 @@
 
 export type User = {
     name: string;
+    username: string;
     link: string;
     bio: string;
     image: string;
-    birthday: string;
+    birthday: string | null;
     is_private: boolean;
 };
 

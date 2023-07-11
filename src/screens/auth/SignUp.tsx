@@ -63,8 +63,8 @@ const SignIn: React.FC = () => {
 
             <View style={styles.inputContainer}>
                 <TextInput mode="outlined" label="Name" value={name} onChangeText={text => setName(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />
-                <TextInput mode="outlined" label="Username" value={username} onChangeText={text => setUsername(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="at" />} />
-                <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
+                <TextInput mode="outlined" label="Username" value={username} onChangeText={text => setUsername(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="at" />} autoCapitalize="none" />
+                <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} inputMode="email" autoCapitalize="none" />
                 <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
                     secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
             </View>
