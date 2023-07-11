@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Button, TextInput, Switch, Text, ActivityIndicator } from 'react-native-paper';
+import { Button, TextInput, Switch, Text, ActivityIndicator } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -26,6 +26,7 @@ import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 import { Profile } from '../../api';
 import { Colors } from '../../utils/colors';
 import { User } from '../../types';
+import Avatar from '../../components/Avatar';
 
 const EditProfile: React.FC = () => {
     const navigation = useNavigation<ProfileStackNavProp>();
@@ -54,7 +55,7 @@ const EditProfile: React.FC = () => {
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ marginTop: SpacingH.s6 }} /> :
                 <View style={styles.container}>
-                    <Avatar.Image size={120} source={{ uri: user.image || "https://afaan.dev/assets/Afaan.png" }} />
+                    <Avatar size={120} name={user.name} image={user.image} />
                     <View style={styles.inputContainer}>
                         <TextInput mode="outlined" label="Username" value={user.username} style={{ width: "100%" }} left={<TextInput.Icon icon="at" />} disabled />
                         <TextInput mode="outlined" label="Name" value={user.name} onChangeText={text => setUser({ ...user, name: text })} style={{ width: "100%" }} left={<TextInput.Icon icon="account" />} />

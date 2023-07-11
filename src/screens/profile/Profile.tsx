@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, Text, IconButton, Menu, Button, Divider, ActivityIndicator } from 'react-native-paper';
+import { Text, IconButton, Menu, Divider, ActivityIndicator } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
@@ -25,6 +25,7 @@ import { ProfileStackNavProp } from '../../navigation/ProfileStack';
 import { Auth } from '../../api';
 import { AuthContext } from '../../utils/AuthContext';
 import { Profile as ProfileAPI } from '../../api';
+import Avatar from '../../components/Avatar';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -48,7 +49,7 @@ const Profile: React.FC = () => {
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
                 <View style={styles.profileCard}>
-                    <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} style={styles.avatar} />
+                    <Avatar size={84} name={data.profile.name} image={data.profile.image} />
                     <View style={styles.cardText}>
                         <Text variant="headlineLarge" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
@@ -112,9 +113,6 @@ const styles = StyleSheet.create({
         paddingVertical: SpacingH.s2,
         gap: SpacingW.s4,
         alignItems: "flex-start",
-    },
-    avatar: {
-        flex: 0,
     },
     cardText: {
         flex: 2,

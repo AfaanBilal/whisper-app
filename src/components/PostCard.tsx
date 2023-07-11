@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, IconButton, Text } from 'react-native-paper';
+import { IconButton, Text } from 'react-native-paper';
 import { format } from 'timeago.js';
 import { useNavigation } from '@react-navigation/native';
 
@@ -21,6 +21,7 @@ import { Post } from '../types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Posts } from '../api';
 import { BottomTabsNavProp } from '../navigation/BottomTabs';
+import Avatar from './Avatar';
 
 type PostCardProps = {
     post: Post;
@@ -53,7 +54,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     return (
         <View style={styles.container}>
             <View style={styles.postContainer}>
-                <Avatar.Image size={42} source={{ uri: post.author.image || "https://afaan.dev/assets/Afaan.png" }} />
+                <Avatar size={42} name={post.author.name} image={post.author.image} />
                 <View style={styles.contentContainer}>
                     <View style={styles.top}>
                         <Text variant="titleMedium" style={styles.author} onPress={() => navigation.navigate("ProfileStack", { screen: "UserProfile", params: { uuid: post.author.uuid } })}>{post.author.name}</Text>

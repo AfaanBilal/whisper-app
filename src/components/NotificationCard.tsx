@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Button, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { format } from 'timeago.js';
 
 import { Colors } from '../utils/colors';
@@ -20,6 +20,7 @@ import { theme } from '../utils/theme';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserResource } from '../types';
 import { Profile } from '../api';
+import Avatar from './Avatar';
 
 type NotificationCardProps = {
     id: number;
@@ -44,7 +45,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ user, type, message
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                <Avatar.Image size={36} source={{ uri: user.image || "https://afaan.dev/assets/Afaan.png" }} />
+                <Avatar size={36} name={user.name} image={user.image} />
                 <View style={styles.contentContainer}>
                     <Text variant="titleMedium" style={styles.content}>{user.name} {message}</Text>
                     <Text variant="labelMedium" style={styles.timestamp}>{format(new Date(created_at))}</Text>

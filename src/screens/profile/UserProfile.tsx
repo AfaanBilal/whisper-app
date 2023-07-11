@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import { Avatar, IconButton, Menu, Text, ActivityIndicator, Button, Chip, Appbar } from 'react-native-paper';
+import { IconButton, Menu, Text, ActivityIndicator, Button, Chip, Appbar } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -25,6 +25,7 @@ import Users from '../../components/Users';
 import { ProfileStackNavProp, ProfileStackParamList } from '../../navigation/ProfileStack';
 import { Users as UserAPI } from '../../api';
 import { theme } from '../../utils/theme';
+import Avatar from '../../components/Avatar';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -62,7 +63,7 @@ const UserProfile: React.FC = () => {
             {isLoading ?
                 <ActivityIndicator animating={true} size="large" color={Colors.SOFT_WHITE} style={{ paddingVertical: SpacingH.s2 }} /> :
                 <View style={styles.profileCard}>
-                    <Avatar.Image size={84} source={{ uri: "https://afaan.dev/assets/Afaan.png" }} />
+                    <Avatar size={84} name={data.profile.name} image={data.profile.image} />
                     <View style={styles.cardText}>
                         <Text variant="headlineLarge" style={{ fontFamily: Fonts.Aclonica }}>{data?.profile.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: SpacingW.s2 }}>
