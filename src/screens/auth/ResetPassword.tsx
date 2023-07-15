@@ -12,12 +12,14 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 import { SpacingH, SpacingW } from '../../utils/size';
 import { RootStackNavProp } from '../../navigation/RootStack';
 import AuthScreenTitle from '../../components/AuthScreenTitle';
 import AuthScreen from '../../components/AuthScreen';
 import AuthButton from '../../components/AuthButton';
+import { Auth } from '../../api';
 
 const Stage = {
     Request: "request",
@@ -29,6 +31,7 @@ const ResetPassword: React.FC = () => {
     const navigation = useNavigation<RootStackNavProp>();
 
     const [stage, setStage] = React.useState(Stage.Request);
+    const [loading, setLoading] = React.useState(false);
 
     const [email, setEmail] = React.useState("");
 
@@ -38,6 +41,88 @@ const ResetPassword: React.FC = () => {
     const [token, setToken] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordVisible, setPasswordVisible] = React.useState(false);
+
+    const requestResetPassword = async () => {
+        if (!email) {
+            Toast.show({
+                type: 'error',
+                text1: 'Please fill in the email.',
+            });
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const r = await Auth.requestResetPassword(email);
+            setUuid(r.data.uuid);
+            setStage(Stage.Verify);
+            Toast.show({
+                type: 'success',
+                text1: r.data.message,
+            });
+        } catch (e: any) {
+            Toast.show({
+                type: 'error',
+                text1: e.response.data.message,
+            });
+        }
+
+        setLoading(false);
+    };
+
+    const verifyCode = async () => {
+        if (!code || code.length < 6) {
+            Toast.show({
+                type: 'error',
+                text1: 'Please fill in the complete code.',
+            });
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const r = await Auth.verifyCode(uuid, code);
+            setToken(r.data.token);
+            setStage(Stage.Reset);
+        } catch (e: any) {
+            Toast.show({
+                type: 'error',
+                text1: e.response.data.message,
+            });
+        }
+
+        setLoading(false);
+    };
+
+    const resetPassword = async () => {
+        if (!password) {
+            Toast.show({
+                type: 'error',
+                text1: 'Please fill in the password.',
+            });
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const r = await Auth.resetPassword(uuid, token, password);
+            navigation.navigate('SignIn');
+            Toast.show({
+                type: 'success',
+                text1: r.data.message,
+            });
+        } catch (e: any) {
+            Toast.show({
+                type: 'error',
+                text1: e.response.data.message,
+            });
+        }
+
+        setLoading(false);
+    };
 
     return (
         <AuthScreen>
@@ -49,7 +134,7 @@ const ResetPassword: React.FC = () => {
                         <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} left={<TextInput.Icon icon="email" />} inputMode="email" autoCapitalize="none" />
                     </View>
 
-                    <AuthButton label="Request Reset" onPress={() => setStage(Stage.Verify)} />
+                    <AuthButton label="Request Reset" onPress={requestResetPassword} loading={loading} />
                 </View>
             }
 
@@ -59,7 +144,7 @@ const ResetPassword: React.FC = () => {
                         <TextInput mode="outlined" label="Code" value={code} onChangeText={text => setCode(text)} left={<TextInput.Icon icon="asterisk" />} maxLength={6} keyboardType="number-pad" inputMode="numeric" />
                     </View>
 
-                    <AuthButton label="Verify Code" onPress={() => setStage(Stage.Reset)} />
+                    <AuthButton label="Verify Code" onPress={verifyCode} loading={loading} />
                 </View>
             }
 
@@ -70,7 +155,7 @@ const ResetPassword: React.FC = () => {
                             secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
                     </View>
 
-                    <AuthButton label="Request Reset" onPress={() => setStage(Stage.Request)} />
+                    <AuthButton label="Request Reset" onPress={resetPassword} loading={loading} />
                 </View>
             }
 
