@@ -60,8 +60,8 @@ const SignIn: React.FC = () => {
             <AuthScreenTitle title="Sign In" />
 
             <View style={styles.inputContainer}>
-                <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="email" />} />
-                <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} style={{ width: "100%" }} left={<TextInput.Icon icon="lock" />}
+                <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} left={<TextInput.Icon icon="email" />} inputMode="email" autoCapitalize="none" />
+                <TextInput mode="outlined" label="Password" value={password} onChangeText={text => setPassword(text)} left={<TextInput.Icon icon="lock" />}
                     secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
             </View>
 
