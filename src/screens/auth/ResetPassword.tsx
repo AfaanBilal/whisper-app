@@ -86,6 +86,10 @@ const ResetPassword: React.FC = () => {
             const r = await Auth.verifyCode(uuid, code);
             setToken(r.data.token);
             setStage(Stage.Reset);
+            Toast.show({
+                type: 'success',
+                text1: 'Code verified! Set a new password.',
+            });
         } catch (e: any) {
             Toast.show({
                 type: 'error',
@@ -134,7 +138,7 @@ const ResetPassword: React.FC = () => {
                         <TextInput mode="outlined" label="Email" value={email} onChangeText={text => setEmail(text)} left={<TextInput.Icon icon="email" />} inputMode="email" autoCapitalize="none" />
                     </View>
 
-                    <AuthButton label="Request Reset" onPress={requestResetPassword} loading={loading} />
+                    <AuthButton label="Reset Password" onPress={requestResetPassword} loading={loading} />
                 </View>
             }
 
@@ -155,7 +159,7 @@ const ResetPassword: React.FC = () => {
                             secureTextEntry={!passwordVisible} right={<TextInput.Icon onPress={() => setPasswordVisible(!passwordVisible)} icon={passwordVisible ? "eye-off" : "eye"} />} />
                     </View>
 
-                    <AuthButton label="Request Reset" onPress={resetPassword} loading={loading} />
+                    <AuthButton label="Set Password" onPress={resetPassword} loading={loading} />
                 </View>
             }
 
