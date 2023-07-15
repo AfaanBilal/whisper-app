@@ -15,7 +15,7 @@ import SignIn from '../screens/auth/SignIn';
 import SignUp from '../screens/auth/SignUp';
 import { AuthContext } from '../utils/AuthContext';
 import BottomTabs from './BottomTabs';
-import ResetPassword from '../screens/auth/ForgotPassword';
+import ResetPassword from '../screens/auth/ResetPassword';
 
 export type RootStackParamList = {
     Tabs: undefined;
