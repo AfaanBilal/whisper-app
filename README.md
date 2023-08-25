@@ -10,12 +10,12 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Screenshots
 
-|              ![SignIn](/screenshots/SignIn.png)              |             ![SignUp](/screenshots/SignUp.png)             |        ![Reset Password](/screenshots/ResetPassword.png)         |
-| :----------------------------------------------------------: | :--------------------------------------------------------: | :--------------------------------------------------------------: |
-|             ![Welcome](/screenshots/Welcome.png)             |               ![Home](/screenshots/Home.png)               |               ![Compose](/screenshots/Compose.png)               |
-|             ![Explore](/screenshots/Explore.png)             |     ![Explore Search](/screenshots/Explore-Search.png)     |          ![User Profile](/screenshots/UserProfile.png)           |
-| ![Notifications Empty](/screenshots/Notifications-Empty.png) | ![Notifications List](/screenshots/Notifications-List.png) | ![Notifications Request](/screenshots/Notifications-Request.png) |
-|             ![Profile](/screenshots/Profile.png)             |       ![Profile Menu](/screenshots/Profile-Menu.png)       |          ![Edit Profile](/screenshots/EditProfile.png)           |
+|              ![SignIn](/screenshots/SignIn.webp)              |             ![SignUp](/screenshots/SignUp.webp)             |        ![Reset Password](/screenshots/ResetPassword.webp)         |
+| :-----------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------------: |
+|             ![Welcome](/screenshots/Welcome.webp)             |               ![Home](/screenshots/Home.webp)               |               ![Compose](/screenshots/Compose.webp)               |
+|             ![Explore](/screenshots/Explore.webp)             |     ![Explore Search](/screenshots/Explore-Search.webp)     |          ![User Profile](/screenshots/UserProfile.webp)           |
+| ![Notifications Empty](/screenshots/Notifications-Empty.webp) | ![Notifications List](/screenshots/Notifications-List.webp) | ![Notifications Request](/screenshots/Notifications-Request.webp) |
+|             ![Profile](/screenshots/Profile.webp)             |       ![Profile Menu](/screenshots/Profile-Menu.webp)       |          ![Edit Profile](/screenshots/EditProfile.webp)           |
 
 ---
 
