@@ -10,6 +10,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Screenshots
 
+![Whisper](/screenshots/whisper.png)
+
 |              ![SignIn](/screenshots/SignIn.webp)              |             ![SignUp](/screenshots/SignUp.webp)             |        ![Reset Password](/screenshots/ResetPassword.webp)         |
 | :-----------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------------: |
 |             ![Welcome](/screenshots/Welcome.webp)             |               ![Home](/screenshots/Home.webp)               |               ![Compose](/screenshots/Compose.webp)               |
