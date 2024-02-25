@@ -1,5 +1,5 @@
-Whisper
-=======
+<img src="./assets/feather.png" width="24px" /> Whisper
+=======================================================
 
 Author: **[Afaan Bilal](https://afaan.dev)**
 
